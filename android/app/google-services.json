@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "737877459078",
+    "project_id": "shopsymart",
+    "storage_bucket": "shopsymart.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737877459078:android:69a674156b7ea252145107",
+        "android_client_info": {
+          "package_name": "in.ecom.shopeymart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzXU5pi-xwYW_O-0_bnpFeDxubbC-nkK0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:737877459078:android:e25e7f86538dae93145107",
+        "android_client_info": {
+          "package_name": "in.ecom.shopsymart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzXU5pi-xwYW_O-0_bnpFeDxubbC-nkK0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
