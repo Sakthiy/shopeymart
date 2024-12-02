@@ -113,7 +113,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         : AppDouble.double18,
                     color: dashBoardCtrl.bottomCurrentIndex.value == index
                         ? context.isDarkMode
-                            ? MyColors.whiteColor
+                            ? MyColors.lightBlueBGColor
                             : MyColors.primaryColor
                         : null,
                   ),

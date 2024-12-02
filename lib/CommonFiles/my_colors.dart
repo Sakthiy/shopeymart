@@ -28,5 +28,6 @@ static Color primaryColor = const Color(0xFF1D4ED8);
 /// Dark Theme Colors
   static Color navigationBarBGColor = const Color(0xff373c4b);
   static Color scaffoldBGColor = const Color(0xff21242d);
+  static Color lightBlueBGColor = const Color(0xffe3eeff);
 
 }
