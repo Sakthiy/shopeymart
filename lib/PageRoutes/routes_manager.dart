@@ -18,7 +18,7 @@ class RouteManager {
   static List<GetPage> getPages() {
     return [
       GetPage(name: Routes.splashScreen, page: () => const SplashScreen()),
-      GetPage(name: Routes.homeScreen, page: () => const HomeScreen()),
+      GetPage(name: Routes.homeScreen, page: () => HomeScreen()),
       GetPage(
           name: Routes.dashBoardScreen, page: () => const DashBoardScreen()),
       GetPage(

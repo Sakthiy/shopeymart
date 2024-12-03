@@ -32,7 +32,7 @@ class _BannerCartState extends State<BannerCart> {
             ),
             Container(
               height: 80,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
                     // MyColors.primaryColor.withOpacity(0),

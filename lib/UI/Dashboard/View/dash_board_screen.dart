@@ -63,48 +63,29 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   }
 
   NavigationBar myBottomNavigationBar(BuildContext context) {
+    /// NavigationBar
     return NavigationBar(
+      // labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        onDestinationSelected: (value) =>
+            dashBoardCtrl.bottomCurrentIndex.value = value,
+        selectedIndex: dashBoardCtrl.bottomCurrentIndex.value,
+        indicatorColor: context.isDarkMode
+            ? MyColors.primaryColor
+            : MyColors.myMaterialColor(MyColors.primaryColor).shade50,
         destinations: List.generate(
-      dashBoardCtrl.screensList.length,
-      (index) => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          index == 2 ? SizedBox(width: AppDouble.double28.w) : const SizedBox(),
-          GestureDetector(
-            onTap: () {
-              dashBoardCtrl.bottomCurrentIndex.value = index;
-            },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppDouble.double18,
-                    vertical: AppDouble.double2,
-                  ),
-                  decoration: BoxDecoration(
-                      color: dashBoardCtrl.bottomCurrentIndex.value == index
-                          ? context.isDarkMode
-                              ? MyColors.primaryColor
-                              : MyColors.myMaterialColor(MyColors.primaryColor)
-                                  .shade50
-                          : null,
-                      borderRadius: BorderRadius.circular(18.0)),
-                  child: Icon(
+          dashBoardCtrl.screensList.length,
+          (index) => Row(
+            children: [
+              index == 2 ? SizedBox(width: AppDouble.double28.w) : const SizedBox(),
+              Expanded(
+                child: NavigationDestination(
+                  selectedIcon: Icon(
                     index == 0
-                        ? dashBoardCtrl.bottomCurrentIndex.value == index
-                            ? Icons.home
-                            : Icons.home_outlined
+                        ? Icons.home
                         : index == 1
-                            ? dashBoardCtrl.bottomCurrentIndex.value == index
-                                ? Icons.grid_view_rounded
-                                : Icons.grid_view_outlined
+                            ? Icons.grid_view_rounded
                             : index == 2
-                                ? dashBoardCtrl.bottomCurrentIndex.value ==
-                                        index
-                                    ? Icons.favorite_rounded
-                                    : Icons.favorite_border_rounded
+                                ? Icons.favorite_rounded
                                 // ? Icons.article
                                 // : Icons.article_outlined
                                 : Icons.menu_rounded,
@@ -117,28 +98,115 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             : MyColors.primaryColor
                         : null,
                   ),
-                ),
-                Text(
-                  index == 0
+                  icon: Icon(
+                    index == 0
+                        ? Icons.home_outlined
+                        : index == 1
+                            ? Icons.grid_view_outlined
+                            : index == 2
+                                ? Icons.favorite_border_rounded
+                                // ? Icons.article
+                                // : Icons.article_outlined
+                                : Icons.menu_rounded,
+                    size: dashBoardCtrl.bottomCurrentIndex.value == index
+                        ? AppDouble.double22
+                        : AppDouble.double18,
+                    color: dashBoardCtrl.bottomCurrentIndex.value == index
+                        ? context.isDarkMode
+                            ? MyColors.lightBlueBGColor
+                            : MyColors.primaryColor
+                        : null,
+                  ),
+                  label: index == 0
                       ? AppStrings.home
                       : index == 1
                           ? AppStrings.categories
                           : index == 2
                               ? AppStrings.favorite
                               : AppStrings.menu,
-                  style: TextStyle(
-                    color: dashBoardCtrl.bottomCurrentIndex.value == index
-                        ? MyColors.primaryColor
-                        : null,
-                    fontSize: AppDouble.double10.sp,
-                  ),
                 ),
-              ],
-            ),
+              ),
+              index == 1 ? SizedBox(width: AppDouble.double28.w):const SizedBox()
+            ],
           ),
-          index == 1 ? SizedBox(width: AppDouble.double28.w) : const SizedBox()
-        ],
-      ),
-    ));
+        ));
+/// This Commend lines is custom NavigationBar
+    // return NavigationBar(
+    //     destinations: List.generate(
+    //   dashBoardCtrl.screensList.length,
+    //   (index) => Row(
+    //     mainAxisAlignment: MainAxisAlignment.center,
+    //     crossAxisAlignment: CrossAxisAlignment.center,
+    //     children: [
+    //       index == 2 ? SizedBox(width: AppDouble.double28.w) : const SizedBox(),
+    //       GestureDetector(
+    //         onTap: () {
+    //           dashBoardCtrl.bottomCurrentIndex.value = index;
+    //         },
+    //         child: Column(
+    //           mainAxisAlignment: MainAxisAlignment.center,
+    //           children: [
+    //             Container(
+    //               padding: EdgeInsets.symmetric(
+    //                 horizontal: AppDouble.double18,
+    //                 vertical: AppDouble.double2,
+    //               ),
+    //               decoration: BoxDecoration(
+    //                   color: dashBoardCtrl.bottomCurrentIndex.value == index
+    //                       ? context.isDarkMode
+    //                           ? MyColors.primaryColor
+    //                           : MyColors.myMaterialColor(MyColors.primaryColor)
+    //                               .shade50
+    //                       : null,
+    //                   borderRadius: BorderRadius.circular(18.0)),
+    //               child: Icon(
+    //                 index == 0
+    //                     ? dashBoardCtrl.bottomCurrentIndex.value == index
+    //                         ? Icons.home
+    //                         : Icons.home_outlined
+    //                     : index == 1
+    //                         ? dashBoardCtrl.bottomCurrentIndex.value == index
+    //                             ? Icons.grid_view_rounded
+    //                             : Icons.grid_view_outlined
+    //                         : index == 2
+    //                             ? dashBoardCtrl.bottomCurrentIndex.value ==
+    //                                     index
+    //                                 ? Icons.favorite_rounded
+    //                                 : Icons.favorite_border_rounded
+    //                             // ? Icons.article
+    //                             // : Icons.article_outlined
+    //                             : Icons.menu_rounded,
+    //                 size: dashBoardCtrl.bottomCurrentIndex.value == index
+    //                     ? AppDouble.double22
+    //                     : AppDouble.double18,
+    //                 color: dashBoardCtrl.bottomCurrentIndex.value == index
+    //                     ? context.isDarkMode
+    //                         ? MyColors.lightBlueBGColor
+    //                         : MyColors.primaryColor
+    //                     : null,
+    //               ),
+    //             ),
+    //             Text(
+    //               index == 0
+    //                   ? AppStrings.home
+    //                   : index == 1
+    //                       ? AppStrings.categories
+    //                       : index == 2
+    //                           ? AppStrings.favorite
+    //                           : AppStrings.menu,
+    //               style: TextStyle(
+    //                 color: dashBoardCtrl.bottomCurrentIndex.value == index
+    //                     ? MyColors.primaryColor
+    //                     : null,
+    //                 fontSize: AppDouble.double10.sp,
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //       index == 1 ? SizedBox(width: AppDouble.double28.w) : const SizedBox()
+    //     ],
+    //   ),
+    // ));
   }
 }

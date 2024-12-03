@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shopeymart/CommonFiles/image_strings.dart';
 import 'package:shopeymart/CommonFiles/my_colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:vibration/vibration.dart';
@@ -71,8 +73,10 @@ class _BannerImagesState extends State<BannerImages> {
                     ),
                     child: CachedNetworkImage(
                       imageUrl: bImage,
-                      errorWidget: (context, url, error) => Image.asset(
-                        'images/placeholder.jpg',
+                      errorWidget: (context, url, error) =>
+                          // SvgPicture.asset(ImageStrings.noImagePlaceholder) ,
+                          Image.asset(
+                        ImageStrings.noImagePlaceholder,
                         fit: BoxFit.cover,
                       ),
                       placeholder: (context, url) =>

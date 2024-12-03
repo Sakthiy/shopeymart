@@ -9,7 +9,7 @@ class DashBoardCtrl extends GetxController {
   DateTime? currentBackPressTime;
 
     RxList<Widget> screensList = [
-      const HomeScreen(),
+      HomeScreen(),
       const Center(child: Text('Category')),
       const Center(child: Text('Orders')),
       const MenuScreen(),
