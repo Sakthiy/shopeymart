@@ -36,6 +36,7 @@ class AppStrings {
   static String signupSuccessfully = 'Signup Successfully!';
   static String signupWithEmail = 'Signup With Email';
   static String login = 'Login';
+  static String logOut = 'LogOut';
   static String or = 'Or';
   static String create = 'Create';
   static String newLabel = 'New';
