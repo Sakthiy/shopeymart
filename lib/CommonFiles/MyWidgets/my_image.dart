@@ -10,6 +10,10 @@ class MyImage extends StatefulWidget {
   final double scale;
   final double? width;
   final double? height;
+  final double? imageWidth;
+  final double? imageHeight;
+  final double? errorImageWidth;
+  final double? errorImageHeight;
   final ImageWidgetBuilder? imageBuilder;
   const MyImage({
     super.key,
@@ -19,6 +23,10 @@ class MyImage extends StatefulWidget {
     this.width,
     this.height,
     this.imageBuilder,
+    this.imageWidth,
+    this.imageHeight,
+    this.errorImageWidth,
+    this.errorImageHeight,
   });
 
   @override
@@ -35,16 +43,17 @@ class _MyImageState extends State<MyImage> {
       width: widget.width,
       height: widget.height,
       imageBuilder: widget.imageBuilder,
-      placeholder: (context, url) =>  Container(
+      placeholder: (context, url) => Container(
         alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height / 3.h,
+        width: widget.imageWidth ?? MediaQuery.of(context).size.width,
+        height: widget.imageHeight ?? MediaQuery.of(context).size.height / 3.h,
         child: const CircularProgressIndicator(),
       ),
       errorWidget: (context, url, error) => Container(
         alignment: Alignment.center,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height / 3.h,
+        width: widget.errorImageWidth ?? MediaQuery.of(context).size.width,
+        height:
+            widget.errorImageHeight ?? MediaQuery.of(context).size.height / 3.h,
         child: Image.asset(
           ImageStrings.noImagePlaceholder,
           fit: BoxFit.cover,

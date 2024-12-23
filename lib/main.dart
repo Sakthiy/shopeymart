@@ -4,22 +4,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shopeymart/CommonFiles/SharedPreferences/shared_preference.dart';
 import 'package:shopeymart/CommonFiles/Theme/Ctrl/theme_ctrl.dart';
+import 'package:shopeymart/FirebaseCore/auth_controller.dart';
+import 'package:shopeymart/FirebaseCore/firebase_auth_constants.dart';
 import 'package:shopeymart/PageRoutes/routes_manager.dart';
-import 'package:shopeymart/firebase_options.dart';
+import 'package:shopeymart/UI/Login/View/login_screen.dart';
+import 'package:shopeymart/FirebaseCore/firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // Initialize PreferenceUtils instance.
   await SharedPreferenceUtils.init();
-  // var brightness =
-  //     SchedulerBinding.instance.platformDispatcher.platformBrightness;
-  // bool isDarkMode = brightness == Brightness.dark;
-  // if (kDebugMode) {
-  //   print('Theme =====> ${ThemeMode.light.obs}');
-  // }
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await firebaseInitialization.then((value) {
+    Get.put(AuthController());
+  });
   runApp(MyApp());
 }
 
@@ -42,6 +38,13 @@ class MyApp extends StatelessWidget {
           theme: themeCtrl.lightTheme,
           darkTheme: themeCtrl.darkTheme,
           getPages: RouteManager.getPages(),
+          builder: (context, child) {
+            return MediaQuery(
+              data: MediaQuery.of(context)
+                  .copyWith(textScaler: const TextScaler.linear(0.80)),
+              child: child!,
+            );
+          },
         ),
       ),
     );

@@ -5,6 +5,8 @@ class MyPadding {
   static EdgeInsets symmetricEdgeInsetsH2V1 =  const EdgeInsets.symmetric(horizontal: 2.0,vertical: 1.0);
   static EdgeInsets symmetricEdgeInsetsH4V6 =  const EdgeInsets.symmetric(horizontal: 4.0,vertical: 6.0);
   static EdgeInsets symmetricEdgeInsetsH10V8 =  const EdgeInsets.symmetric(horizontal: 10.0,vertical: 8.0);
+  static EdgeInsets symmetricEdgeInsetsH13V8 =  const EdgeInsets.symmetric(horizontal: 13.0,vertical: 8.0);
+  static EdgeInsets symmetricEdgeInsetsH18V8 =  const EdgeInsets.symmetric(horizontal: 18.0,vertical: 8.0);
   static EdgeInsets symmetricEdgeInsetsH8V10 =  const EdgeInsets.symmetric(horizontal: 8.0,vertical: 10.0);
   static EdgeInsets symmetricEdgeInsetsH15V8 =  const EdgeInsets.symmetric(horizontal: 15.0,vertical: 8.0);
   static EdgeInsets symmetricEdgeInsetsH10V15 =  const EdgeInsets.symmetric(horizontal: 10.0,vertical: 15.0);

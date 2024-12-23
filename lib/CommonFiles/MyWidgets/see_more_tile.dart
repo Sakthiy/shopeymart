@@ -11,6 +11,7 @@ class SeeMoreTile extends StatelessWidget {
   final String? buttonText;
   final Widget? icon;
   final bool? isMore;
+  final EdgeInsetsGeometry? padding;
   final bool? isPadding;
   final VoidCallback? onPressed;
   const SeeMoreTile({
@@ -21,12 +22,15 @@ class SeeMoreTile extends StatelessWidget {
     this.buttonText,
     this.isMore = true,
     this.isPadding = true,
+    this.padding,
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: isPadding! ? MyPadding.horizontalEdgeInsets20 : EdgeInsets.zero,
+      padding: isPadding!
+          ? padding ?? MyPadding.horizontalEdgeInsets20
+          : EdgeInsets.zero,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -42,7 +46,8 @@ class SeeMoreTile extends StatelessWidget {
                   icon: Text(
                     buttonText ?? AppStrings.viewAll,
                     style: MyTextStyle.poppinsRegularTextStyleF13.copyWith(
-                      color: MyColors.greyColor,
+                      color: MyColors.primaryColor,
+                      decoration: TextDecoration.underline,
                     ),
                   ),
                   label: icon ??

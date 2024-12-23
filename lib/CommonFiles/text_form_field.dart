@@ -21,6 +21,10 @@ class MyTextFormField extends StatelessWidget {
   final InputBorder? enabledBorder;
   final BorderSide? borderSide;
   final TextEditingController? controller;
+  final FormFieldValidator? validator;
+  final TextInputAction? textInputAction;
+  final TextInputType? keyboardType;
+  final ValueChanged<String>? onChanged;
   const MyTextFormField({
     super.key,
     this.label,
@@ -40,6 +44,9 @@ class MyTextFormField extends StatelessWidget {
     this.minLines,
     this.maxLength,
     this.textAlign = TextAlign.start,
+    this.validator,
+    this.textInputAction, this.keyboardType, this.onChanged,
+
   });
 
   @override
@@ -49,6 +56,11 @@ class MyTextFormField extends StatelessWidget {
       obscureText: obscureText!,
       maxLines: maxLines,
       textAlign: textAlign,
+      validator: validator,
+      keyboardType: keyboardType,
+      maxLength: maxLength,
+      onChanged: onChanged,
+      textInputAction: textInputAction ?? TextInputAction.next,
       decoration: InputDecoration(
         filled: filled,
         fillColor: fillColor,

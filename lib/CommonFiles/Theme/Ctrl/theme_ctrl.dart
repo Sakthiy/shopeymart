@@ -25,11 +25,13 @@ class ThemeCtrl extends GetxController {
       primarySwatch: MyColors.myMaterialColor(
         MyColors.primaryColor,
       ), // You can use your custom color
-      appBarTheme: AppBarTheme(
-        color: MyColors.myMaterialColor(
-          MyColors.primaryColor,
-        ),
-      ),
+      scaffoldBackgroundColor:
+        MyColors.lightPrimaryColor,
+      appBarTheme: const AppBarTheme(
+          // color: MyColors.myMaterialColor(
+          //   MyColors.primaryColor,
+          // ),
+          ),
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: MyColors.whiteColor,
       ),
@@ -49,11 +51,11 @@ class ThemeCtrl extends GetxController {
         bodyLarge: TextStyle(fontFamily: 'Poppins-Medium'),
         bodyMedium: TextStyle(fontFamily: 'Poppins-Medium'),
       ),
-      appBarTheme: AppBarTheme(
-        color: MyColors.myMaterialColor(
-          MyColors.primaryColor,
-        ),
-      ),
+      appBarTheme: const AppBarTheme(
+          // color: MyColors.myMaterialColor(
+          //   MyColors.primaryColor,
+          // ),
+          ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         backgroundColor: MyColors.primaryColor,
       ),
@@ -73,16 +75,18 @@ class ThemeCtrl extends GetxController {
     if (savedTheme != null) {
       themeMode.value = ThemeMode.values[savedTheme];
     } else {
-      themeMode.value = ThemeMode.light;  // Default to light theme
+      themeMode.value = ThemeMode.light; // Default to light theme
     }
   }
 
   // Save theme to SharedPreferences
   Future<void> updateTheme(ThemeMode mode) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setInt('themeMode', mode.index);  // Save the index of the themeMode
+    await prefs.setInt(
+        'themeMode', mode.index); // Save the index of the themeMode
     themeMode.value = mode;
   }
+
   @override
   void onInit() {
     loadTheme();

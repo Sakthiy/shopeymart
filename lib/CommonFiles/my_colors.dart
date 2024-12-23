@@ -28,6 +28,7 @@ class MyColors {
   static Color greyColor = Colors.grey;
   static Color transparent = Colors.transparent;
   static Color primaryColor = const Color(0xFF1D4ED8);
+  static Color lightPrimaryColor = const Color(0xfffafaff);
 
   /// Dark Theme Colors
   static Color navigationBarBGColor = const Color(0xff373c4b);

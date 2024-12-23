@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:shopeymart/UI/Categories/View/categories_screen.dart';
+import 'package:shopeymart/UI/Favorite/View/favorite.dart';
 import 'package:shopeymart/UI/Home/View/home_screen.dart';
 import 'package:shopeymart/UI/Menu/menu_screen.dart';
 
@@ -10,8 +12,8 @@ class DashBoardCtrl extends GetxController {
 
     RxList<Widget> screensList = [
       HomeScreen(),
-      const Center(child: Text('Category')),
-      const Center(child: Text('Orders')),
+      const CategoriesScreen(),
+      const FavoriteScreen(),
       const MenuScreen(),
     ].obs;
 }

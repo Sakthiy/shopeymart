@@ -8,6 +8,7 @@ import 'package:shopeymart/CommonFiles/image_strings.dart';
 import 'package:shopeymart/CommonFiles/my-text-style.dart';
 import 'package:shopeymart/CommonFiles/my_colors.dart';
 import 'package:shopeymart/CommonFiles/my_padding.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class CartDesignWidget extends StatelessWidget {
   const CartDesignWidget({
@@ -59,7 +60,7 @@ class CartDesignWidget extends StatelessWidget {
                     children: [
                       Container(
                         decoration:
-                        BoxDecoration(color: MyColors.lightBlueBGColor),
+                            BoxDecoration(color: MyColors.lightBlueBGColor),
                         child: MyImage(
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height / 3.h,
@@ -70,14 +71,16 @@ class CartDesignWidget extends StatelessWidget {
                       ),
 
                       /// Favourite Section
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: SvgPicture.asset(
-                          isFavourite
-                              ? ImageStrings.redHeart
-                              : ImageStrings.heart,
-                          height: AppDouble.double25.h,
-                          width: AppDouble.double25.w,
+                      Skeleton.ignore(
+                        child: Align(
+                          alignment: Alignment.topRight,
+                          child: SvgPicture.asset(
+                            isFavourite
+                                ? ImageStrings.redHeart
+                                : ImageStrings.heart,
+                            height: AppDouble.double25.h,
+                            width: AppDouble.double25.w,
+                          ),
                         ),
                       ),
 
@@ -86,56 +89,56 @@ class CartDesignWidget extends StatelessWidget {
                         children: [
                           isTopSeller != null
                               ? isTopSeller!
-                              ? Container(
-                            padding: MyPadding.horizontalEdgeInsets6,
-                            decoration: BoxDecoration(
-                              color: MyColors.redColor,
-                              borderRadius: BorderRadius.circular(
-                                AppDouble.double3.r,
-                              ),
-                            ),
-                            child: Text(
-                              AppStrings.topSeller.toUpperCase(),
-                              style: MyTextStyle
-                                  .poppinsRegularTextStyleF13
-                                  .copyWith(
-                                letterSpacing: 0,
-                                fontSize: AppDouble.double10.sp,
-                                color: MyColors.whiteColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          )
-                              : const SizedBox()
+                                  ? Container(
+                                      padding: MyPadding.horizontalEdgeInsets6,
+                                      decoration: BoxDecoration(
+                                        color: MyColors.redColor,
+                                        borderRadius: BorderRadius.circular(
+                                          AppDouble.double3.r,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        AppStrings.topSeller.toUpperCase(),
+                                        style: MyTextStyle
+                                            .poppinsRegularTextStyleF13
+                                            .copyWith(
+                                          letterSpacing: 0,
+                                          fontSize: AppDouble.double10.sp,
+                                          color: MyColors.whiteColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    )
+                                  : const SizedBox()
                               : const SizedBox(),
                           isTopSeller != null
                               ? isTopSeller!
-                              ? SizedBox(height: AppDouble.double4.h)
-                              : const SizedBox()
+                                  ? SizedBox(height: AppDouble.double4.h)
+                                  : const SizedBox()
                               : const SizedBox(),
                           isBestSeller != null
                               ? isBestSeller!
-                              ? Container(
-                            padding: MyPadding.horizontalEdgeInsets6,
-                            decoration: BoxDecoration(
-                              color: MyColors.redColor,
-                              borderRadius: BorderRadius.circular(
-                                AppDouble.double3.r,
-                              ),
-                            ),
-                            child: Text(
-                              AppStrings.bestSeller.toUpperCase(),
-                              style: MyTextStyle
-                                  .poppinsRegularTextStyleF13
-                                  .copyWith(
-                                letterSpacing: 0,
-                                fontSize: AppDouble.double10.sp,
-                                color: MyColors.whiteColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          )
-                              : const SizedBox()
+                                  ? Container(
+                                      padding: MyPadding.horizontalEdgeInsets6,
+                                      decoration: BoxDecoration(
+                                        color: MyColors.redColor,
+                                        borderRadius: BorderRadius.circular(
+                                          AppDouble.double3.r,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        AppStrings.bestSeller.toUpperCase(),
+                                        style: MyTextStyle
+                                            .poppinsRegularTextStyleF13
+                                            .copyWith(
+                                          letterSpacing: 0,
+                                          fontSize: AppDouble.double10.sp,
+                                          color: MyColors.whiteColor,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    )
+                                  : const SizedBox()
                               : const SizedBox(),
                         ],
                       ),
@@ -148,7 +151,7 @@ class CartDesignWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: MyColors.greenColor,
                             borderRadius:
-                            BorderRadius.circular(AppDouble.double3),
+                                BorderRadius.circular(AppDouble.double3),
                           ),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -189,36 +192,37 @@ class CartDesignWidget extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: AppDouble.double3.h),
+
                       ///Product Prices
                       Wrap(
                         // crossAxisAlignment: WrapCrossAlignment.start,
                         children: [
                           /// Product Discount Price
                           discountPrice != null ||
-                              discountPrice != '' ||
-                              discountPrice != '0'
+                                  discountPrice != '' ||
+                                  discountPrice != '0'
                               ? Text(
-                            price,
-                            style: MyTextStyle.poppinsSemiBoldTextStyleF15
-                                .copyWith(
-                              letterSpacing: 0,
-                              color: MyColors.greyColor,
-                              fontSize: AppDouble.double13.sp,
-                              decoration: TextDecoration.lineThrough,
-                            ),
-                          )
+                                  price,
+                                  style: MyTextStyle.poppinsSemiBoldTextStyleF15
+                                      .copyWith(
+                                    letterSpacing: 0,
+                                    color: MyColors.greyColor,
+                                    fontSize: AppDouble.double13.sp,
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                )
                               : const SizedBox(),
                           discountPrice != null ||
-                              discountPrice != '' ||
-                              discountPrice != '0'
+                                  discountPrice != '' ||
+                                  discountPrice != '0'
                               ? SizedBox(width: AppDouble.double6.w)
                               : const SizedBox(),
 
                           /// Product Price
                           Text(
                             discountPrice == null ||
-                                discountPrice == '0' ||
-                                discountPrice == ''
+                                    discountPrice == '0' ||
+                                    discountPrice == ''
                                 ? '₹$price'
                                 : '₹$discountPrice',
                             style: MyTextStyle.poppinsSemiBoldTextStyleF15
@@ -232,80 +236,85 @@ class CartDesignWidget extends StatelessWidget {
                       ),
 
                       /// Product Offers Section
+                      /// Limited Time Deal
                       discountType != null
                           ? discount != null ||
-                          discount != '0' ||
-                          discount != ''
-                          ? Row(
-                        children: [
-                          Icon(
-                            Icons.arrow_downward_outlined,
-                            size: AppDouble.double14,
-                            color: MyColors.greenColor,
-                          ),
-                          Text(
-                            discountType == 'percent'
-                                ? '$discount% Off'
-                                : '-$discount Flat',
-                            style: MyTextStyle
-                                .poppinsRegularTextStyleF13
-                                .copyWith(
-                              color: MyColors.greenColor,
-                              fontSize: AppDouble.double11.sp,
-                            ),
-                          ),
-                        ],
-                      )
-                          : const SizedBox()
+                                  discount != '0' ||
+                                  discount != ''
+                              ? Row(
+                                  children: [
+                                    Icon(
+                                      Icons.arrow_downward_outlined,
+                                      size: AppDouble.double14,
+                                      color: MyColors.greenColor,
+                                    ),
+                                    Text(
+                                      discountType == 'percent'
+                                          ? '$discount% Off'
+                                          : '-$discount Flat',
+                                      style: MyTextStyle
+                                          .poppinsRegularTextStyleF13
+                                          .copyWith(
+                                        color: MyColors.greenColor,
+                                        fontSize: AppDouble.double11.sp,
+                                      ),
+                                    ),
+                                    SizedBox(width: AppDouble.double3.h),
+
+                                    /// Limited Time Deal
+                                    isLimitedTimeDeal!
+                                        ? Container(
+                                            padding:
+                                                MyPadding.horizontalEdgeInsets6,
+                                            decoration: BoxDecoration(
+                                              color: MyColors.redColor,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                AppDouble.double3,
+                                              ),
+                                            ),
+                                            child: Text(
+                                              AppStrings.limitedTimeDeal,
+                                              style: MyTextStyle
+                                                  .poppinsRegularTextStyleF13
+                                                  .copyWith(
+                                                letterSpacing: 0,
+                                                fontSize: AppDouble.double10.sp,
+                                                color: MyColors.whiteColor,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          )
+                                        : const SizedBox(),
+                                  ],
+                                )
+                              : const SizedBox()
                           : const SizedBox(),
-                      SizedBox(height: AppDouble.double3.h),
-                      /// Limited Time Deal
-                      isLimitedTimeDeal!
-                          ? Container(
-                        padding: MyPadding.horizontalEdgeInsets6,
-                        decoration: BoxDecoration(
-                          color: MyColors.redColor,
-                          borderRadius: BorderRadius.circular(
-                            AppDouble.double3,
-                          ),
-                        ),
-                        child: Text(
-                          AppStrings.limitedTimeDeal,
-                          style: MyTextStyle
-                              .poppinsRegularTextStyleF13
-                              .copyWith(
-                            letterSpacing: 0,
-                            fontSize: AppDouble.double10.sp,
-                            color: MyColors.whiteColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      )
-                          : const SizedBox(),
+
                       SizedBox(height: AppDouble.double3.h),
                       Row(
                         children: [
                           isFreeDelivery
                               ? Text(
-                            AppStrings.freeDelivery,
-                            style: MyTextStyle.poppinsRegularTextStyleF13
-                                .copyWith(
-                              letterSpacing: 0,
-                              fontSize: AppDouble.double10.sp,
-                            ),
-                          )
+                                  AppStrings.freeDelivery,
+                                  style: MyTextStyle.poppinsRegularTextStyleF13
+                                      .copyWith(
+                                    letterSpacing: 0,
+                                    fontSize: AppDouble.double10.sp,
+                                  ),
+                                )
                               : const SizedBox(),
                           SizedBox(width: AppDouble.double6.w),
                           minStockWarranty! < maxStockWarranty!
                               ? Text(
-                            '$minStockWarranty ${AppStrings.onlyLeft}',
-                            style: MyTextStyle.poppinsRegularTextStyleF13
-                                .copyWith(
-                              letterSpacing: 0,
-                              fontSize: AppDouble.double10.sp,
-                              color: MyColors.redColor,
-                            ),
-                          )
+                                  '$minStockWarranty ${AppStrings.onlyLeft}',
+                                  style: MyTextStyle.poppinsRegularTextStyleF13
+                                      .copyWith(
+                                    letterSpacing: 0,
+                                    fontSize: AppDouble.double10.sp,
+                                    color: MyColors.redColor,
+                                  ),
+                                )
                               : const SizedBox(),
                         ],
                       ),

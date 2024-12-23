@@ -18,7 +18,11 @@ class _MenuScreenState extends State<MenuScreen> {
         ListTile(
           onTap: () => Get.toNamed(Routes.settingsScreen),
           title: Text(AppStrings.settings),
-        )
+        ),
+        ListTile(
+          onTap: () => Get.toNamed(Routes.loginScreen),
+          title: Text(AppStrings.login),
+        ),
       ],
     );
   }

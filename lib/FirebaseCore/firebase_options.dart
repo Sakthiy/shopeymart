@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'shopsymart.firebasestorage.app',
     iosBundleId: 'in.ecom.shopeymart',
   );
+
 }

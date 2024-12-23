@@ -1,14 +1,13 @@
 import 'dart:async';
-
 import 'package:get/get.dart';
-import 'package:shopeymart/PageRoutes/routes_manager.dart';
+import 'package:shopeymart/FirebaseCore/auth_controller.dart';
 
 class SplashScreenCtrl extends GetxController {
   @override
   void onInit() {
     Timer(
       const Duration(seconds: 3),
-      () => Get.offAllNamed(Routes.dashBoardScreen),
+        ()=> Get.put(AuthController()).initialized,
     );
     super.onInit();
   }
