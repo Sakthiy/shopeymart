@@ -28,8 +28,8 @@ class AppStrings {
   static String enterPassword = 'Enter the Password';
   static String enterConfirmPassword = 'Enter the Confirm Password';
   static String confirmPasswordMismatching = 'Confirm password is mismatching';
-  static const passwordUpdatedSuccessfully = "Password updated Successfully!";
-  static const backToLogin = "Back to Login";
+  static String passwordUpdatedSuccessfully = "Password updated Successfully!";
+  static String backToLogin = "Back to Login";
   static String update = 'Update';
   static String submit = 'Submit';
   static String signup = 'Signup';
@@ -44,15 +44,16 @@ class AppStrings {
   static String donHaveAnAccountYet = 'Don\'t have an account yet?';
   static String forgetPassword = 'Forget Password?';
   static String loginWithGoogle = 'Login with Google';
+  static String somethingWentWrong = 'Something Went Wrong!';
   // static String forgetPassword = 'Forget Password?';
-  static const continueLabel = "Continue";
+  static String continueLabel = "Continue";
   static String loginToShopeyMart = 'Login to Shopey Mart';
 
   static String checkYourMail = 'Check Your mail';
   static String processingData = 'Processing Data';
   static String exploreCategories = 'Explore Categories';
-  static const emailVerificationProcess = "Enter your email id for the verification process, We will send 4 digit code to your email";
-  static const shopSlogan = "Shop Smarter, Live Better – Sign In to Your Ultimate Shopping Experience!";
-  static const emailOrPhoneLabel ="Enter email or phone number";
-  static const invalidEmailOrPhoneLabel ="Invalid your email or phone number";
+  static String emailVerificationProcess = "Enter your email id for the verification process, We will send 4 digit code to your email";
+  static String shopSlogan = "Shop Smarter, Live Better – Sign In to Your Ultimate Shopping Experience!";
+  static String emailOrPhoneLabel ="Enter email or phone number";
+  static String invalidEmailOrPhoneLabel ="Invalid your email or phone number";
 }

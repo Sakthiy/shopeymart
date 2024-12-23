@@ -38,7 +38,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   fontSize: AppDouble.double22.sp,
                 ),),
                 SizedBox(height: 10.0.h),
-                const Text(AppStrings.emailVerificationProcess),
+                Text(AppStrings.emailVerificationProcess),
                 SizedBox(height: 15.0.h),
                 MyTextFormField(
                   controller: ctrl.emailOrPhoneCtrl,
