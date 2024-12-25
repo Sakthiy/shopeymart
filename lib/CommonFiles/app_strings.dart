@@ -4,6 +4,7 @@ class AppStrings {
 
   static String home = 'Home';
   static String all = 'All';
+  static String reviews = 'Reviews';
   static String search = 'Search';
   static String favorite = 'Favorite';
   static String categories = 'Categories';
@@ -15,6 +16,8 @@ class AppStrings {
   static String viewAll = 'View All';
   static String allItems = 'All Items';
   static String settings = 'Settings';
+  static String delivery = 'Delivery';
+  static String deliveryFee = 'Delivery fee';
   static String freeDelivery = 'Free Delivery';
   static String currentThemeMode = 'Current Theme Mode';
   static String limitedTimeDeal = 'Limited Time Deal';
@@ -46,6 +49,7 @@ class AppStrings {
   static String forgetPassword = 'Forget Password?';
   static String loginWithGoogle = 'Login with Google';
   static String somethingWentWrong = 'Something Went Wrong!';
+  static String alreadyLogin = 'Already Login';
   // static String forgetPassword = 'Forget Password?';
   static String continueLabel = "Continue";
   static String loginToShopeyMart = 'Login to Shopey Mart';

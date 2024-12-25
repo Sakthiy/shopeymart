@@ -10,7 +10,7 @@ import 'package:shopeymart/CommonFiles/my_button.dart';
 import 'package:shopeymart/CommonFiles/text_form_field.dart';
 import 'package:shopeymart/CommonFiles/validator_email_phone_num.dart';
 import 'package:shopeymart/PageRoutes/routes_manager.dart';
-import 'package:shopeymart/UI/Forgot%20Password/Ctrl/forgot_password_ctrl.dart';
+import 'package:shopeymart/UI/ForgotPassword/Ctrl/forgot_password_ctrl.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({super.key});

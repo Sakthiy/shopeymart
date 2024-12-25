@@ -1,17 +1,12 @@
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:shopeymart/CommonFiles/MyWidgets/banner_images.dart';
-import 'package:shopeymart/CommonFiles/MyWidgets/cart_design_widget.dart';
 import 'package:shopeymart/CommonFiles/MyWidgets/cart_design_widget_small.dart';
 import 'package:shopeymart/CommonFiles/MyWidgets/see_more_tile.dart';
 import 'package:shopeymart/CommonFiles/app_double.dart';
 import 'package:shopeymart/CommonFiles/app_strings.dart';
-import 'package:shopeymart/CommonFiles/dimensions.dart';
 import 'package:shopeymart/CommonFiles/my-text-style.dart';
 import 'package:shopeymart/CommonFiles/my_colors.dart';
 import 'package:shopeymart/CommonFiles/my_padding.dart';
@@ -48,68 +43,66 @@ class _HomeScreenState extends State<HomeScreen> {
                 imageRadius: 0,
                 imageHorizontalPadding: 0,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  color: MyColors.whiteColor,
-                ),
-                child: Column(
-                  children: [
-                    SeeMoreTile(
-                        title: AppStrings.exploreCategories,
-                        icon: const SizedBox(),
-                        onPressed: () {
-                          Get.put(DashBoardCtrl()).bottomCurrentIndex.value = 1;
-                        }),
-                    categoriesCtrl.categoriesResp.value != null
-                        ? SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: List.generate(
-                                categoriesCtrl
-                                    .categoriesResp.value!.categories.length,
-                                (index) => Padding(
-                                  padding: MyPadding.symmetricEdgeInsetsH4V6,
-                                  child: GestureDetector(
-                                    onTap: () {},
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          height: AppDouble.double50.r,
-                                          width: AppDouble.double50.r,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: CachedNetworkImageProvider(
-                                                categoriesCtrl.categoriesResp.value!
-                                                    .categories[index].imageUrl,
-                                              ),
+              Column(
+                children: [
+                  SeeMoreTile(
+                      title: AppStrings.exploreCategories,
+                      icon: const SizedBox(),
+                      onPressed: () {
+                        Get.put(DashBoardCtrl()).bottomCurrentIndex.value = 1;
+                      }),
+                  categoriesCtrl.categoriesResp.value != null
+                      ? SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: List.generate(
+                              categoriesCtrl
+                                  .categoriesResp.value!.categories.length,
+                              (index) => Padding(
+                                padding: MyPadding.symmetricEdgeInsetsH4V6,
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        height: AppDouble.double50.r,
+                                        width: AppDouble.double50.r,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: CachedNetworkImageProvider(
+                                              categoriesCtrl
+                                                  .categoriesResp
+                                                  .value!
+                                                  .categories[index]
+                                                  .imageUrl,
                                             ),
                                           ),
                                         ),
-                                        SizedBox(
-                                          width: 80.w,
-                                          child: Text(
-                                              categoriesCtrl.categoriesResp.value!
-                                                  .categories[index].name,
-                                              textAlign: TextAlign.center,
-                                              style: MyTextStyle
-                                                  .poppinsRegularTextStyleF13
-                                                  .copyWith(
-                                                fontSize: 12.0,
-                                              )),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                      SizedBox(
+                                        width: 80.w,
+                                        child: Text(
+                                            categoriesCtrl.categoriesResp.value!
+                                                .categories[index].name,
+                                            textAlign: TextAlign.center,
+                                            style: MyTextStyle
+                                                .poppinsRegularTextStyleF13
+                                                .copyWith(
+                                              fontSize: 12.0,
+                                            )),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
                             ),
-                          )
-                        : const SizedBox(),
-                  ],
-                ),
+                          ),
+                        )
+                      : const SizedBox(),
+                ],
               ),
               const SeeMoreTile(
                 title: 'Offer Products',
@@ -126,7 +119,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ...List.generate(
                       8,
                       (index) => GestureDetector(
-                        onTap: () => Get.toNamed(Routes.paymentScreen),
+                        // onTap: () => Get.toNamed(Routes.paymentScreen),
+                        onTap: () => Get.toNamed(Routes.productDetailsScreen),
                         child: const CartDesignWidgetSmall(
                           maxStockWarranty: 80,
                           minStockWarranty: 79,

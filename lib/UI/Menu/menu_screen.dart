@@ -24,10 +24,10 @@ class _MenuScreenState extends State<MenuScreen> {
           onTap: () => Get.toNamed(Routes.settingsScreen),
           title: Text(AppStrings.settings),
         ),
-        ListTile(
-          onTap: () => Get.toNamed(Routes.loginScreen),
-          title: Text(AppStrings.login),
-        ),
+        // ListTile(
+        //   onTap: () => Get.toNamed(Routes.loginScreen),
+        //   title: Text(AppStrings.login),
+        // ),
         GestureDetector(
           onTap: () {
             MyBottomSheet.myLoader();

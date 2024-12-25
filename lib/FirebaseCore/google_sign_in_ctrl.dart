@@ -9,8 +9,8 @@ class GoogleSignInCtrl extends GetxController{
   GoogleSignInAccount? user;
 
   Future googleLogin()async{
-    MyBottomSheet.myLoader();
     try {
+    MyBottomSheet.myLoader();
       final googleUser = await googleSignIn.signIn();
       Get.back();
       if (googleUser == null) return;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:shopeymart/CommonFiles/MyWidgets/my_image.dart';
 import 'package:shopeymart/CommonFiles/app_double.dart';
 import 'package:shopeymart/CommonFiles/app_strings.dart';
@@ -51,7 +52,7 @@ class CartDesignWidgetSmall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: AppDouble.double140.w,
+      width: AppDouble.double150.w,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -79,15 +80,24 @@ class CartDesignWidgetSmall extends StatelessWidget {
                       ),
 
                       /// Favourite Section
-                      Skeleton.ignore(
-                        child: Align(
-                          alignment: Alignment.topRight,
-                          child: SvgPicture.asset(
-                            isFavourite
-                                ? ImageStrings.redHeart
-                                : ImageStrings.heart,
-                            height: AppDouble.double25.h,
-                            width: AppDouble.double25.w,
+
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: GestureDetector(
+                          child: Container(
+                            padding: EdgeInsets.all(AppDouble.double4).r,
+                            decoration: BoxDecoration(
+                              color: MyColors.whiteColor.withOpacity(0.8),
+                              shape: BoxShape.circle,
+                            ),
+                            child: isFavourite
+                                ? Icon(
+                                    Iconsax.heart5,
+                                    color: MyColors.redColor,
+                                  )
+                                : const Icon(
+                                    Iconsax.heart,
+                                  ),
                           ),
                         ),
                       ),

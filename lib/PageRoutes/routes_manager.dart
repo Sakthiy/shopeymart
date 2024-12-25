@@ -2,13 +2,14 @@ import 'package:get/get.dart';
 import 'package:shopeymart/Payments/View/payment_screen.dart';
 import 'package:shopeymart/UI/Categories/View/Categories_all_items.dart';
 import 'package:shopeymart/UI/Dashboard/View/dash_board_screen.dart';
-import 'package:shopeymart/UI/Forgot%20Password/View/create_new_password.dart';
-import 'package:shopeymart/UI/Forgot%20Password/View/forgot_password.dart';
-import 'package:shopeymart/UI/Forgot%20Password/View/otp_password.dart';
+import 'package:shopeymart/UI/ForgotPassword/View/create_new_password.dart';
+import 'package:shopeymart/UI/ForgotPassword/View/forgot_password.dart';
+import 'package:shopeymart/UI/ForgotPassword/View/otp_password.dart';
 import 'package:shopeymart/UI/Home/View/home_screen.dart';
 import 'package:shopeymart/UI/Login/View/login_screen.dart';
 import 'package:shopeymart/UI/Login/View/signup_screen.dart';
 import 'package:shopeymart/UI/Menu/Settings/settings_screen.dart';
+import 'package:shopeymart/UI/ProductsDetails/View/product_details_screen.dart';
 import 'package:shopeymart/UI/SplashScreen/View/splash_screen.dart';
 
 class Routes {
@@ -20,10 +21,11 @@ class Routes {
   static const searchScreen = '/searchScreen';
   static const categoriesAllItems = '/categoriesAllItems';
   static const loginScreen = '/loginScreen';
-  static const forgotPasswordScreen = '/ForgotPasswordScreen';
-  static const createPasswordScreen = '/CreatePasswordScreen';
-  static const forgetOTPPasswordScreen = '/ForgetOTPPasswordScreen';
-  static const signupScreen = '/SignupScreen';
+  static const forgotPasswordScreen = '/forgotPasswordScreen';
+  static const createPasswordScreen = '/createPasswordScreen';
+  static const forgetOTPPasswordScreen = '/forgetOTPPasswordScreen';
+  static const signupScreen = '/signupScreen';
+  static const productDetailsScreen = '/productDetailsScreen';
 }
 
 class RouteManager {
@@ -46,6 +48,7 @@ class RouteManager {
       GetPage(name: Routes.createPasswordScreen, page: () => const CreateNewPassword()),
       GetPage(name: Routes.forgetOTPPasswordScreen, page: () => const ForgetOTPPassword()),
       GetPage(name: Routes.signupScreen, page: () => const SignupScreen()),
+      GetPage(name: Routes.productDetailsScreen, page: () => const ProductDetailsScreen()),
     ];
   }
 }
