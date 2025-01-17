@@ -29,35 +29,46 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         builder: (ctrl) => Padding(
           padding: const EdgeInsets.all(15.0).r,
           child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Lottie.asset('assets/lottie/forgot_password.json',repeat: false),
-                Text(AppStrings.forgetPassword,style: MyTextStyle.poppinsExtraBoldTextStyle.copyWith(
-                  letterSpacing: 0,
-                  fontSize: AppDouble.double22.sp,
-                ),),
-                SizedBox(height: 10.0.h),
-                Text(AppStrings.emailVerificationProcess),
-                SizedBox(height: 15.0.h),
-                MyTextFormField(
-                  controller: ctrl.emailOrPhoneCtrl,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(AppDouble.double8).r,
+            child: Form(
+              key: ctrl.formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Lottie.asset('assets/lottie/forgot_password.json',
+                      repeat: false),
+                  Text(
+                    AppStrings.forgetPassword,
+                    style: MyTextStyle.poppinsExtraBoldTextStyle.copyWith(
+                      letterSpacing: 0,
+                      fontSize: AppDouble.double22.sp,
+                    ),
                   ),
-                  prefixIcon: const Icon(Iconsax.sms),
-                  validator: (input) =>
-                      ValidatorEmailPhoneNum.isEmailOrPhone(input)
-                          ? null
-                          : AppStrings.invalidEmailOrPhoneLabel,
-                  label: AppStrings.emailOrPhoneLabel,
-                ),
-                SizedBox(height: 35.0.h),
-                MyButton(
-                  title: AppStrings.continueLabel,
-                  onTap: () => Get.toNamed(Routes.createPasswordScreen),
-                ),
-              ],
+                  SizedBox(height: 10.0.h),
+                  Text(AppStrings.emailVerificationProcess),
+                  SizedBox(height: 15.0.h),
+                  MyTextFormField(
+                    controller: ctrl.emailOrPhoneCtrl,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(AppDouble.double8).r,
+                    ),
+                    prefixIcon: const Icon(Iconsax.sms),
+                    validator: (input) =>
+                        ValidatorEmailPhoneNum.isEmailOrPhone(input)
+                            ? null
+                            : AppStrings.invalidEmailOrPhoneLabel,
+                    label: AppStrings.emailOrPhoneLabel,
+                  ),
+                  SizedBox(height: 35.0.h),
+                  MyButton(
+                    title: AppStrings.continueLabel,
+                    onTap: () {
+                      if (ctrl.formKey.currentState!.validate()) {
+                        ctrl.apiCall(context,ctrl.emailOrPhoneCtrl.text);
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

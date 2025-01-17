@@ -19,9 +19,11 @@ class SharedPreferenceUtils {
   // Get a String value from preferences.
   static String? getString(String key) {
     if (_prefsInstance == null) {
-      throw Exception("SharedPreferences not initialized. Please call init() first.");
+      throw Exception(
+          "SharedPreferences not initialized. Please call init() first.");
     }
-    return _prefsInstance?.getString(key); // Default to empty string if not found
+    return _prefsInstance
+        ?.getString(key); // Default to empty string if not found
   }
 
   // Set a String value in preferences.
@@ -33,7 +35,8 @@ class SharedPreferenceUtils {
   // Get a bool value from preferences.
   static bool? getBool(String key) {
     if (_prefsInstance == null) {
-      throw Exception("SharedPreferences not initialized. Please call init() first.");
+      throw Exception(
+          "SharedPreferences not initialized. Please call init() first.");
     }
     return _prefsInstance?.getBool(key); // Default to false if not found
   }
@@ -47,7 +50,8 @@ class SharedPreferenceUtils {
   // Get an int value from preferences.
   static int? getInt(String key) {
     if (_prefsInstance == null) {
-      throw Exception("SharedPreferences not initialized. Please call init() first.");
+      throw Exception(
+          "SharedPreferences not initialized. Please call init() first.");
     }
     return _prefsInstance?.getInt(key); // Default to 0 if not found
   }
@@ -61,7 +65,8 @@ class SharedPreferenceUtils {
   // Get a double value from preferences.
   static double? getDouble(String key) {
     if (_prefsInstance == null) {
-      throw Exception("SharedPreferences not initialized. Please call init() first.");
+      throw Exception(
+          "SharedPreferences not initialized. Please call init() first.");
     }
     return _prefsInstance?.getDouble(key); // Default to 0.0 if not found
   }
@@ -75,14 +80,28 @@ class SharedPreferenceUtils {
   // Get a List<String> value from preferences.
   static List<String>? getStringList(String key) {
     if (_prefsInstance == null) {
-      throw Exception("SharedPreferences not initialized. Please call init() first.");
+      throw Exception(
+          "SharedPreferences not initialized. Please call init() first.");
     }
-    return _prefsInstance?.getStringList(key); // Default to empty list if not found
+    return _prefsInstance
+        ?.getStringList(key); // Default to empty list if not found
   }
 
   // Set a List<String> value in preferences.
   static Future<bool> setStringList(String key, List<String> value) async {
     var prefs = await _instance;
     return prefs.setStringList(key, value);
+  }
+
+  // Clear a specific key.
+  static Future<bool> removeKey(String key) async {
+    var prefs = await _instance;
+    return prefs.remove(key);
+  }
+
+  // Clear all preferences.
+  static Future<bool> clearAll() async {
+    var prefs = await _instance;
+    return prefs.clear();
   }
 }

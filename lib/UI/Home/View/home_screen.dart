@@ -8,7 +8,6 @@ import 'package:shopeymart/CommonFiles/MyWidgets/see_more_tile.dart';
 import 'package:shopeymart/CommonFiles/app_double.dart';
 import 'package:shopeymart/CommonFiles/app_strings.dart';
 import 'package:shopeymart/CommonFiles/my-text-style.dart';
-import 'package:shopeymart/CommonFiles/my_colors.dart';
 import 'package:shopeymart/CommonFiles/my_padding.dart';
 import 'package:shopeymart/PageRoutes/routes_manager.dart';
 import 'package:shopeymart/UI/Categories/Ctrl/categories_ctrl.dart';
@@ -24,86 +23,100 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final categoriesCtrl = Get.put(CategoriesCtrl());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: GetBuilder(
-      init: HomeCtrl(),
-      builder: (homeCtrl) => GetBuilder(
-        init: CategoriesCtrl(),
-        builder: (categoriesCtrl) => SingleChildScrollView(
+      body: Obx(
+        () => SingleChildScrollView(
           child: Column(
             children: [
-              BannerImages(
-                bannerImageList: homeCtrl.bannerImage.value,
-                height: AppDouble.double180.h,
-                indicatorDownPadding: AppDouble.double30.r,
-                viewportFraction: 1,
-                isVibration: true,
-                imageRadius: 0,
-                imageHorizontalPadding: 0,
-              ),
-              Column(
-                children: [
-                  SeeMoreTile(
-                      title: AppStrings.exploreCategories,
-                      icon: const SizedBox(),
-                      onPressed: () {
-                        Get.put(DashBoardCtrl()).bottomCurrentIndex.value = 1;
-                      }),
-                  categoriesCtrl.categoriesResp.value != null
-                      ? SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: List.generate(
-                              categoriesCtrl
-                                  .categoriesResp.value!.categories.length,
-                              (index) => Padding(
-                                padding: MyPadding.symmetricEdgeInsetsH4V6,
-                                child: GestureDetector(
-                                  onTap: () {},
-                                  child: Column(
+              // BannerImages(
+              //   bannerImageList: homeCtrl.bannerImage.value,
+              //   height: AppDouble.double180.h,
+              //   indicatorDownPadding: AppDouble.double30.r,
+              //   viewportFraction: 1,
+              //   isVibration: true,
+              //   imageRadius: 0,
+              //   imageHorizontalPadding: 0,
+              // ),
+
+                  Skeletonizer(
+                    enabled: categoriesCtrl.categoriesModel.value == null,
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SeeMoreTile(
+                              title: AppStrings.exploreCategories,
+                              icon: const SizedBox(),
+                              onPressed: () {
+                                Get.put(DashBoardCtrl())
+                                    .bottomCurrentIndex
+                                    .value = 1;
+                              }),
+                          categoriesCtrl.categoriesModel.value != null
+                              ? SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height: AppDouble.double50.r,
-                                        width: AppDouble.double50.r,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: CachedNetworkImageProvider(
-                                              categoriesCtrl
-                                                  .categoriesResp
-                                                  .value!
-                                                  .categories[index]
-                                                  .imageUrl,
-                                            ),
+                                    children: List.generate(
+                                      categoriesCtrl
+                                          .categoriesModel.value!.data.length,
+                                      (index) => Padding(
+                                        padding:
+                                            MyPadding.symmetricEdgeInsetsH4V6,
+                                        child: GestureDetector(
+                                          onTap: () {},
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                height: AppDouble.double50.r,
+                                                width: AppDouble.double50.r,
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  image: DecorationImage(
+                                                    fit: BoxFit.cover,
+                                                    image:
+                                                        CachedNetworkImageProvider(
+                                                      categoriesCtrl
+                                                          .categoriesModel
+                                                          .value!
+                                                          .data[index]
+                                                          .image,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 80.w,
+                                                child: Text(
+                                                    categoriesCtrl
+                                                        .categoriesModel
+                                                        .value!
+                                                        .data[index]
+                                                        .categoryName,
+                                                    textAlign: TextAlign.center,
+                                                    style: MyTextStyle
+                                                        .poppinsRegularTextStyleF13
+                                                        .copyWith(
+                                                      fontSize: 12.0,
+                                                    )),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: 80.w,
-                                        child: Text(
-                                            categoriesCtrl.categoriesResp.value!
-                                                .categories[index].name,
-                                            textAlign: TextAlign.center,
-                                            style: MyTextStyle
-                                                .poppinsRegularTextStyleF13
-                                                .copyWith(
-                                              fontSize: 12.0,
-                                            )),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                      : const SizedBox(),
-                ],
-              ),
+                                )
+                              : const SizedBox(),
+                        ],
+                      ),
+                  ),
+
               const SeeMoreTile(
                 title: 'Offer Products',
                 icon: SizedBox(),
@@ -146,36 +159,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-    ));
+    );
   }
 }
-
-// class SliverDelegate extends SliverPersistentHeaderDelegate {
-//   Widget child;
-//   double height;
-//   Function(bool isPinned)? callback;
-//   bool isPinned = false;
-//
-//   SliverDelegate({required this.child, this.height = 50, this.callback});
-//
-//   @override
-//   Widget build(
-//       BuildContext context, double shrinkOffset, bool overlapsContent) {
-//     isPinned = shrinkOffset == maxExtent /*|| shrinkOffset < maxExtent*/;
-//     callback!(isPinned);
-//     return child;
-//   }
-//
-//   @override
-//   double get maxExtent => height;
-//
-//   @override
-//   double get minExtent => height;
-//
-//   @override
-//   bool shouldRebuild(SliverDelegate oldDelegate) {
-//     return oldDelegate.maxExtent != height ||
-//         oldDelegate.minExtent != height ||
-//         child != oldDelegate.child;
-//   }
-// }

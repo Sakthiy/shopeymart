@@ -9,45 +9,65 @@ CategoriesModel categoriesModelFromJson(String str) => CategoriesModel.fromJson(
 String categoriesModelToJson(CategoriesModel data) => json.encode(data.toJson());
 
 class CategoriesModel {
-  List<Category> categories;
+  bool success;
+  int count;
+  List<Datum> data;
 
   CategoriesModel({
-    required this.categories,
+    required this.success,
+    required this.count,
+    required this.data,
   });
 
   factory CategoriesModel.fromJson(Map<String, dynamic> json) => CategoriesModel(
-    categories: List<Category>.from(json["categories"].map((x) => Category.fromJson(x))),
+    success: json["success"],
+    count: json["count"],
+    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
-    "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
+    "success": success,
+    "count": count,
+    "data": List<dynamic>.from(data.map((x) => x.toJson())),
   };
 }
 
-class Category {
-  int id;
-  String name;
-  String imageUrl;
-  List<Category>? subCategories;
+class Datum {
+  String id;
+  String categoryName;
+  String image;
+  bool homeDisplay;
+  bool published;
+  bool isActive;
+  String date;
 
-  Category({
+  Datum({
     required this.id,
-    required this.name,
-    required this.imageUrl,
-    this.subCategories,
+    required this.categoryName,
+    required this.image,
+    required this.homeDisplay,
+    required this.published,
+    required this.isActive,
+    required this.date,
   });
 
-  factory Category.fromJson(Map<String, dynamic> json) => Category(
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     id: json["id"],
-    name: json["name"],
-    imageUrl: json["imageUrl"],
-    subCategories: json["subCategories"] == null ? [] : List<Category>.from(json["subCategories"]!.map((x) => Category.fromJson(x))),
+    categoryName: json["category_name"],
+    image: json["image"],
+    homeDisplay: json["home_display"],
+    published: json["published"],
+    isActive: json["isActive"],
+    date: json["date"],
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "name": name,
-    "imageUrl": imageUrl,
-    "subCategories": subCategories == null ? [] : List<dynamic>.from(subCategories!.map((x) => x.toJson())),
+    "category_name": categoryName,
+    "image": image,
+    "home_display": homeDisplay,
+    "published": published,
+    "isActive": isActive,
+    "date": date,
   };
 }

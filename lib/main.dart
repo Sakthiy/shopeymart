@@ -1,14 +1,11 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:shopeymart/CommonFiles/SharedPreferences/shared_preference.dart';
 import 'package:shopeymart/CommonFiles/Theme/Ctrl/theme_ctrl.dart';
 import 'package:shopeymart/FirebaseCore/auth_controller.dart';
 import 'package:shopeymart/FirebaseCore/firebase_auth_constants.dart';
 import 'package:shopeymart/PageRoutes/routes_manager.dart';
-import 'package:shopeymart/UI/Login/View/login_screen.dart';
-import 'package:shopeymart/FirebaseCore/firebase_options.dart';
+import 'package:shopeymart/SharedPreferences/shared_preference.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,13 +35,13 @@ class MyApp extends StatelessWidget {
           theme: themeCtrl.lightTheme,
           darkTheme: themeCtrl.darkTheme,
           getPages: RouteManager.getPages(),
-          builder: (context, child) {
-            return MediaQuery(
-              data: MediaQuery.of(context)
-                  .copyWith(textScaler: const TextScaler.linear(0.80)),
-              child: child!,
-            );
-          },
+          // builder: (context, child) {
+          //   return MediaQuery(
+          //     data: MediaQuery.of(context)
+          //         .copyWith(textScaler: const TextScaler.linear(0.80)),
+          //     child: child!,
+          //   );
+          // },
         ),
       ),
     );

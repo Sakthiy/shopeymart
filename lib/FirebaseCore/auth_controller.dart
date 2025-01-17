@@ -53,6 +53,7 @@ class AuthController extends GetxController {
           MyBottomSheet.myDialog(
             errorCode: error.code,
             message: error.message.toString(),
+
             /// Something went wrong. Try again.
           );
         }

@@ -31,7 +31,7 @@ class _MenuScreenState extends State<MenuScreen> {
         GestureDetector(
           onTap: () {
             MyBottomSheet.myLoader();
-            Get.put(GoogleSignInCtrl()).googleLogOut();
+            // Get.put(GoogleSignInCtrl()).googleLogOut();
             Get.put(AuthController()).initialized;
           },
           child: Text(AppStrings.logOut,style: MyTextStyle.poppinsExtraBoldTextStyle.copyWith(

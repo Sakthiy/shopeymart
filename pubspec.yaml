@@ -36,6 +36,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   firebase_core: ^3.8.0
+  dio:
   firebase_auth:
   cloud_firestore: ^5.6.0
   google_sign_in:
@@ -55,6 +56,7 @@ dependencies:
   iconsax: ^0.0.8
   gradient_circular_progress_indicator: ^0.0.4
   lottie: ^3.2.0
+  pinput: ^5.0.0
 
 dev_dependencies:
   flutter_test:

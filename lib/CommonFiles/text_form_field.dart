@@ -25,6 +25,7 @@ class MyTextFormField extends StatelessWidget {
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
   final ValueChanged<String>? onChanged;
+  final AutovalidateMode? autovalidateMode;
   const MyTextFormField({
     super.key,
     this.label,
@@ -45,8 +46,9 @@ class MyTextFormField extends StatelessWidget {
     this.maxLength,
     this.textAlign = TextAlign.start,
     this.validator,
-    this.textInputAction, this.keyboardType, this.onChanged,
-
+    this.textInputAction,
+    this.keyboardType,
+    this.onChanged, this.autovalidateMode,
   });
 
   @override
@@ -60,6 +62,7 @@ class MyTextFormField extends StatelessWidget {
       keyboardType: keyboardType,
       maxLength: maxLength,
       onChanged: onChanged,
+      autovalidateMode: autovalidateMode,
       textInputAction: textInputAction ?? TextInputAction.next,
       decoration: InputDecoration(
         filled: filled,

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -62,13 +65,13 @@ class MyBottomSheet {
   static myDialog({required String message, required String errorCode}) =>
       Get.defaultDialog(
         barrierDismissible: false,
-        onWillPop: ()async{
+        onWillPop: () async {
           return false;
         },
         title: '${AppStrings.error} $errorCode',
         content: Text(message),
         onCancel: () => Get.back(),
-        onConfirm: () => SystemNavigator.pop(),
+        onConfirm: () => kDebugMode ? exit(0) : SystemNavigator.pop(),
       );
 
   static myLoader() {
@@ -90,5 +93,11 @@ class MyBottomSheet {
             ],
           ),
         ));
+  }
+
+  static mySnackBar(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+    ));
   }
 }

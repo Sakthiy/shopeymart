@@ -38,6 +38,7 @@ class AppStrings {
   static String signup = 'Signup';
   static String signupSuccessfully = 'Signup Successfully!';
   static String signupWithEmail = 'Signup With Email';
+  static String notFound = 'Not Found';
   static String login = 'Login';
   static String logOut = 'LogOut';
   static String or = 'Or';
@@ -52,13 +53,23 @@ class AppStrings {
   static String alreadyLogin = 'Already Login';
   // static String forgetPassword = 'Forget Password?';
   static String continueLabel = "Continue";
+  static String enterOTP = "Enter OTP";
+  static String resendOTP = "Resend OTP?";
+  static String pleaseEnterTheOTPSandTo = "Please Enter the OTP sand to";
   static String loginToShopeyMart = 'Login to Shopey Mart';
 
   static String checkYourMail = 'Check Your mail';
   static String processingData = 'Processing Data';
   static String exploreCategories = 'Explore Categories';
-  static String emailVerificationProcess = "Enter your email id for the verification process, We will send 4 digit code to your email";
-  static String shopSlogan = "Shop Smarter, Live Better – Sign In to Your Ultimate Shopping Experience!";
-  static String emailOrPhoneLabel ="Enter email or phone number";
-  static String invalidEmailOrPhoneLabel ="Invalid your email or phone number";
+  static String emailVerificationProcess =
+      "Enter your email id for the verification process, We will send 4 digit code to your email";
+  static String shopSlogan =
+      "Shop Smarter, Live Better – Sign In to Your Ultimate Shopping Experience!";
+  static String emailOrPhoneLabel = "Enter email or phone number";
+  static String invalidEmailOrPhoneLabel = "Invalid your email or phone number";
+  static String invalidEmailId = "Invalid email Id";
+  // static String invalidEmailOrPhoneLabel ="Invalid your email or phone number";
+  static String invalidCredentials = "Invalid credentials";
+  static String loginSuccessfully = "Login Successfully";
+  static String successfullyLoggedIn = "Successfully logged in";
 }

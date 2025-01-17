@@ -7,7 +7,10 @@ import 'package:shopeymart/CommonFiles/app_double.dart';
 import 'package:shopeymart/CommonFiles/app_numbers.dart';
 import 'package:shopeymart/CommonFiles/app_strings.dart';
 import 'package:shopeymart/CommonFiles/my_colors.dart';
+import 'package:shopeymart/SharedPreferences/shared_prefer_value.dart';
+import 'package:shopeymart/SharedPreferences/shared_preference.dart';
 import 'package:shopeymart/UI/Dashboard/Ctrl/dash_board_ctrl.dart';
+import 'package:shopeymart/UI/Login/Ctrl/login_ctrl.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({
@@ -20,6 +23,7 @@ class DashBoardScreen extends StatefulWidget {
 
 class _DashBoardScreenState extends State<DashBoardScreen> {
   final DashBoardCtrl dashBoardCtrl = Get.put(DashBoardCtrl());
+  final LoginCtrl loginCtrl = Get.put(LoginCtrl());
   @override
   Widget build(BuildContext context) {
     return Obx(() => PopScope(
@@ -51,7 +55,11 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             floatingActionButton: Padding(
               padding: EdgeInsets.only(top: AppDouble.double8).r,
               child: FloatingActionButton(
-                onPressed: () {},
+                onPressed: () async {
+                bool result =  await SharedPreferenceUtils.removeKey(SharedPrefString.userToken);
+                print('${SharedPrefString.userToken} ========> Remove $result');
+                  loginCtrl.loginChecker();
+                },
                 child: Icon(
                   Icons.shopping_cart_outlined,
                   color: MyColors.whiteColor,
@@ -65,7 +73,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
   NavigationBar myBottomNavigationBar(BuildContext context) {
     /// NavigationBar
     return NavigationBar(
-      // labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        // labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
         onDestinationSelected: (value) =>
             dashBoardCtrl.bottomCurrentIndex.value = value,
         selectedIndex: dashBoardCtrl.bottomCurrentIndex.value,
@@ -76,7 +84,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
           dashBoardCtrl.screensList.length,
           (index) => Row(
             children: [
-              index == 2 ? SizedBox(width: AppDouble.double28.w) : const SizedBox(),
+              index == 2
+                  ? SizedBox(width: AppDouble.double28.w)
+                  : const SizedBox(),
               Expanded(
                 child: NavigationDestination(
                   selectedIcon: Icon(
@@ -126,11 +136,14 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                               : AppStrings.menu,
                 ),
               ),
-              index == 1 ? SizedBox(width: AppDouble.double28.w):const SizedBox()
+              index == 1
+                  ? SizedBox(width: AppDouble.double28.w)
+                  : const SizedBox()
             ],
           ),
         ));
-/// This Commend lines is custom NavigationBar
+
+    /// This Commend lines is custom NavigationBar
     // return NavigationBar(
     //     destinations: List.generate(
     //   dashBoardCtrl.screensList.length,

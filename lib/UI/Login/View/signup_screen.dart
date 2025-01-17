@@ -132,6 +132,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       // }
                       ctrl.phoneAuthentication(
                           ctrl.emailOrPhoneNoTextCtrl.text.trim());
+                      Get.toNamed(Routes.createPasswordScreen);
                       FocusScope.of(context).unfocus();
                       // MyBottomSheet.myBottomSheet(
                       //     title: AppStrings.signupSuccessfully,
