@@ -10,8 +10,9 @@ import 'package:shopeymart/CommonFiles/app_strings.dart';
 import 'package:shopeymart/CommonFiles/my-text-style.dart';
 import 'package:shopeymart/CommonFiles/my_colors.dart';
 import 'package:shopeymart/CommonFiles/my_padding.dart';
+import 'package:shopeymart/PageRoutes/routes_manager.dart';
 import 'package:shopeymart/UI/Categories/Ctrl/categories_ctrl.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+import 'package:shopeymart/UI/Favorite/Ctrl/favorite_ctrl.dart';
 
 class CategoriesAllItems extends StatefulWidget {
   const CategoriesAllItems({super.key});
@@ -21,160 +22,160 @@ class CategoriesAllItems extends StatefulWidget {
 }
 
 class _CategoriesAllItemsState extends State<CategoriesAllItems> {
+  final categoriesCtrl = Get.put(CategoriesCtrl());
+  final favoriteCtrl = Get.put(FavoriteCtrl());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(Get.parameters['appBarTitle']!),
-        ),
-        body: GetBuilder(
-          init: CategoriesCtrl(),
-          builder: (categoriesCtrl) => Column(
+        appBar: AppBar(title: Text(Get.parameters['appBarTitle']!)),
+        body: Obx(
+          () => Column(
             children: [
               /// Sub Categories
               SizedBox(height: AppDouble.double8.h),
-              categoriesCtrl.categoriesModel.value!.data.isNotEmpty
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SeeMoreTile(
-                          title: AppStrings.subCategories,
-                          isMore: false,
-                        ),
-                        SizedBox(height: AppDouble.double8.h),
-                        SingleChildScrollView(
-                          controller: categoriesCtrl.scrollSubCategoriesCtrl,
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: MyPadding.symmetricEdgeInsetsH4V6,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    if (categoriesCtrl
-                                            .isSubCategoriesSelected.value ==
-                                        false) {
-                                      categoriesCtrl
-                                          .isSubCategoriesSelected.value = true;
-                                      categoriesCtrl.update();
-                                    }
-                                  },
-                                  child: Container(
-                                    padding: MyPadding.symmetricEdgeInsetsH18V8,
-                                    decoration: BoxDecoration(
-                                      color: categoriesCtrl
-                                              .isSubCategoriesSelected.value
-                                          ? MyColors.primaryColor
-                                              .withOpacity(.2)
-                                          : null,
-                                      borderRadius: BorderRadius.circular(
-                                              AppDouble.double5)
-                                          .r,
-                                    ),
-                                    child: Text(AppStrings.all,
-                                        style: MyTextStyle
-                                            .poppinsRegularTextStyleF13
-                                            .copyWith(
-                                                fontSize: AppDouble.double18.sp,
-                                                fontWeight: FontWeight.bold)),
-                                  ),
-                                ),
-                              ),
-                              ...List.generate(
-                                categoriesCtrl
-                                    .categoriesModel.value!.data.length,
-                                (index) => Padding(
-                                  padding: MyPadding.symmetricEdgeInsetsH4V6,
-                                  child: GestureDetector(
-                                    // onTap: () {
-                                    //   categoriesCtrl.update();
-                                    // },
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          height: AppDouble.double60.r,
-                                          width: AppDouble.double60.r,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            border: Border.all(
-                                              color: categoriesCtrl
-                                                          .subCategoriesCurrentIndex
-                                                          .value ==
-                                                      index
-                                                  ? MyColors.primaryColor
-                                                  : MyColors.whiteColor,
-                                              width: categoriesCtrl
-                                                          .subCategoriesCurrentIndex
-                                                          .value ==
-                                                      index
-                                                  ? 3
-                                                  : 0,
-                                            ),
-                                            image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: CachedNetworkImageProvider(
-                                                categoriesCtrl.categoriesModel
-                                                    .value!.data[index].image,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 80.w,
-                                          child: Text(
+              categoriesCtrl.subcategoryModel.value == null
+                  ? const CircularProgressIndicator()
+                  : categoriesCtrl.subcategoryModel.value!.data.isNotEmpty
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SeeMoreTile(
+                              title: AppStrings.subCategories,
+                              isMore: false,
+                            ),
+                            SizedBox(height: AppDouble.double8.h),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: [
+                                  ...List.generate(
+                                    categoriesCtrl
+                                        .subcategoryModel.value!.data.length,
+                                    (index) => Padding(
+                                      padding:
+                                          MyPadding.symmetricEdgeInsetsH4V6,
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          categoriesCtrl
+                                                  .takingCategoriesAllItemsAppBarTitle
+                                                  .value =
                                               categoriesCtrl
-                                                  .categoriesModel
+                                                  .subcategoryModel
                                                   .value!
                                                   .data[index]
-                                                  .categoryName,
-                                              textAlign: TextAlign.center,
-                                              style: MyTextStyle
-                                                  .poppinsRegularTextStyleF13
-                                                  .copyWith(
-                                                fontSize: 12.0,
-                                              )),
+                                                  .subcategoryName;
+                                          categoriesCtrl.update();
+                                          categoriesCtrl
+                                              .getSubCategoryInerProducts(
+                                            categoryByProductId: categoriesCtrl
+                                                .subcategoryModel
+                                                .value!
+                                                .data[index]
+                                                .id,
+                                          );
+                                          // categoriesCtrl
+                                          //     .getSubCategoryByProducts(
+                                          //   subCategoryByProductId:
+                                          //       categoriesCtrl.categoriesModel
+                                          //           .value!.data[index].id,
+                                          // );
+                                          Get.toNamed(
+                                              Routes.subCategoryProductScreen,
+                                              parameters: {
+                                                'appBarTitle': categoriesCtrl
+                                                    .subcategoryModel
+                                                    .value!
+                                                    .data[index]
+                                                    .subcategoryName,
+                                              });
+                                        },
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              height: AppDouble.double60.r,
+                                              width: AppDouble.double60.r,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image:
+                                                      CachedNetworkImageProvider(
+                                                    categoriesCtrl
+                                                        .subcategoryModel
+                                                        .value!
+                                                        .data[index]
+                                                        .images,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 80.w,
+                                              child: Text(
+                                                  categoriesCtrl
+                                                      .subcategoryModel
+                                                      .value!
+                                                      .data[index]
+                                                      .subcategoryName,
+                                                  textAlign: TextAlign.center,
+                                                  style: MyTextStyle
+                                                      .poppinsRegularTextStyleF13
+                                                      .copyWith(
+                                                    fontSize: 12.0,
+                                                  )),
+                                            ),
+                                          ],
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ),
-                                ),
+                                  categoriesCtrl.subcategoryModel.value!.data
+                                              .length >
+                                          8
+                                      ? GestureDetector(
+                                          onTap: () {},
+                                          child: Text(
+                                            AppStrings.viewAll,
+                                            style: MyTextStyle
+                                                .poppinsRegularTextStyleF13
+                                                .copyWith(
+                                              fontSize: AppDouble.double12.sp,
+                                              color: MyColors.primaryColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        )
+                                      : const SizedBox(),
+                                ],
                               ),
-                              Container(
-                                padding: MyPadding.symmetricEdgeInsetsH18V8,
-                                decoration: BoxDecoration(
-                                  color: categoriesCtrl
-                                          .isSubCategoriesSelected.value
-                                      ? MyColors.primaryColor.withOpacity(.2)
-                                      : null,
-                                  borderRadius:
-                                      BorderRadius.circular(AppDouble.double5)
-                                          .r,
-                                ),
-                                child: Text(AppStrings.viewAll,
-                                    style: MyTextStyle
-                                        .poppinsRegularTextStyleF13
-                                        .copyWith(
-                                            fontSize: AppDouble.double18.sp,
-                                            fontWeight: FontWeight.bold)),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    )
-                  : const SizedBox(),
+                            ),
+                          ],
+                        )
+                      : const SizedBox(),
 
               categoriesCtrl.categoriesByProductsModel.value != null
                   ? categoriesCtrl.categoriesByProductsModel.value!.data.isEmpty
-                      ? Text(AppStrings.notFound,
-                          textAlign: TextAlign.center,
-                          style:
-                              MyTextStyle.poppinsRegularTextStyleF13.copyWith(
-                            fontSize: 12.0,
-                          ))
+                      ? Expanded(
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  AppStrings.notFound,
+                                  style: MyTextStyle.poppinsRegularTextStyleF13
+                                      .copyWith(
+                                    fontSize: AppDouble.double12.sp,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
                       :
 
                       /// Grid View Products
@@ -192,8 +193,6 @@ class _CategoriesAllItemsState extends State<CategoriesAllItems> {
                                 .w, // The minimum item width (can be smaller, if the layout constraints are smaller)
                             minItemsPerRow:
                                 2, // The minimum items to show in a single row. Takes precedence over minItemWidth
-                            // maxItemsPerRow: 5, // The maximum items to show in a single row. Can be useful on large screens
-                            // listViewBuilderOptions: ListViewBuilderOptions(), // Options that are getting passed to the ListView.builder() function
                             children: List.generate(
                               categoriesCtrl
                                   .categoriesByProductsModel.value!.data.length,
@@ -206,9 +205,38 @@ class _CategoriesAllItemsState extends State<CategoriesAllItems> {
                                     .data[index]
                                     .offerDiscount
                                     .toString(),
-                                isLimitedTimeDeal: true,
-                                isFavourite: true,
+                                isLimitedTimeDeal: false,
+
+                                isFavourite: categoriesCtrl
+                                    .categoriesByProductsModel
+                                    .value!
+                                    .data[index]
+                                    .isInWishlist,
+                                isFavouriteLoad:
+                                    favoriteCtrl.favoriteIndex.value == index
+                                        ? favoriteCtrl
+                                            .apiController.isLoading.value
+                                        : false,
                                 // isBestSeller: true,
+                                onTapFavourite: () {
+                                  // Useing favorit index
+                                  favoriteCtrl.favoriteIndex.value = index;
+
+                                  categoriesCtrl.update();
+                                  favoriteCtrl.favoritePostDelete(
+                                    index: index,
+                                    isFavourite: categoriesCtrl
+                                        .categoriesByProductsModel
+                                        .value!
+                                        .data[index]
+                                        .isInWishlist,
+                                    productId: categoriesCtrl
+                                        .categoriesByProductsModel
+                                        .value!
+                                        .data[index]
+                                        .id,
+                                  );
+                                },
                                 isTopSeller: true,
                                 discountType: categoriesCtrl
                                     .categoriesByProductsModel
@@ -219,17 +247,39 @@ class _CategoriesAllItemsState extends State<CategoriesAllItems> {
                                     .categoriesByProductsModel
                                     .value!
                                     .data[index]
-                                    .variants[0]
-                                    .images[0],
-                                isFreeDelivery: true,
-                                price: '800',
-                                productName:
-                                    """OM SAI LATEST CREATION Soft Cotton & Silk Saree for Women Banarasi Saree Under 399 2021 Beautiful for Women Saree""",
+                                    .variants
+                                    .first
+                                    .images
+                                    .first,
+                                isFreeDelivery: categoriesCtrl
+                                        .categoriesByProductsModel
+                                        .value!
+                                        .data[index]
+                                        .shippingFeeType ==
+                                    'Free Shipping',
+                                price: categoriesCtrl.categoriesByProductsModel
+                                    .value!.data[index].variants.first.price
+                                    .toString(),
+                                discountPrice: categoriesCtrl
+                                    .categoriesByProductsModel
+                                    .value!
+                                    .data[index]
+                                    .variants
+                                    .first
+                                    .sellingPrice
+                                    .toString(),
+                                productName: categoriesCtrl
+                                    .categoriesByProductsModel
+                                    .value!
+                                    .data[index]
+                                    .productName,
                               ),
                             ), // The list of widgets in the list
                           ),
                         )
-                  : const Center(child: CircularProgressIndicator())
+                  : const Center(
+                      child: CircularProgressIndicator(),
+                    )
             ],
           ),
         ));

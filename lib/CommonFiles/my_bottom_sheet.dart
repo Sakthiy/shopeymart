@@ -10,6 +10,7 @@ import 'package:shopeymart/CommonFiles/app_double.dart';
 import 'package:shopeymart/CommonFiles/app_strings.dart';
 import 'package:shopeymart/CommonFiles/my-text-style.dart';
 import 'package:shopeymart/CommonFiles/my_button.dart';
+import 'package:shopeymart/CommonFiles/my_colors.dart';
 
 class MyBottomSheet {
   static myBottomSheet({
@@ -62,16 +63,23 @@ class MyBottomSheet {
         ),
       );
 
-  static myDialog({required String message, required String errorCode}) =>
+  static myDialog({
+    required String message,
+    required String errorCode,
+    VoidCallback? onConfirm,
+    VoidCallback? onCancel,
+    bool isError = true,
+  }) =>
       Get.defaultDialog(
         barrierDismissible: false,
         onWillPop: () async {
           return false;
         },
-        title: '${AppStrings.error} $errorCode',
+        title: '${isError ? AppStrings.error : ''} $errorCode',
         content: Text(message),
-        onCancel: () => Get.back(),
-        onConfirm: () => kDebugMode ? exit(0) : SystemNavigator.pop(),
+        confirmTextColor: MyColors.whiteColor,
+        onCancel: onCancel ?? () => Get.back(),
+        onConfirm: onConfirm ?? () => Get.back(),
       );
 
   static myLoader() {

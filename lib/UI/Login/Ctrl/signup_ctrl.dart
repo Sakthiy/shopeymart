@@ -18,8 +18,7 @@ class SignupCtrl extends GetxController {
     isConfirmPasswordView.value = !isConfirmPasswordView.value;
   }
 
-void phoneAuthentication(String phoneNo){
-    AuthController().phoneNumAuth(phoneNo);
-}
-
+  void phoneAuthentication(String phoneNo) {
+    // AuthController().phoneNumAuth(phoneNo);
+  }
 }

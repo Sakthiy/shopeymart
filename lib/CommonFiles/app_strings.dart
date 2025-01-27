@@ -71,5 +71,7 @@ class AppStrings {
   // static String invalidEmailOrPhoneLabel ="Invalid your email or phone number";
   static String invalidCredentials = "Invalid credentials";
   static String loginSuccessfully = "Login Successfully";
+  static String skipToLogin = "Skip to Login";
   static String successfullyLoggedIn = "Successfully logged in";
+  static String wishlistLoginDialog = "To add an item to your Wishlist, you need to log in to your account first.";
 }

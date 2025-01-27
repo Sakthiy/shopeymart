@@ -37,7 +37,7 @@ class Datum {
   String productName;
   FkCategory fkCategory;
   dynamic fkSubcategory;
-  FkBrand fkBrand;
+  FkBrand? fkBrand;
   List<dynamic> tags;
   String productShortDesc;
   String productLongDesc;
@@ -57,7 +57,7 @@ class Datum {
   List<String> tax;
   String skuid;
   int quantity;
-  List<String> attrName;
+  List<String?> attrName;
   List<Variant> variants;
   String shippingFeeType;
   dynamic shippingFee;
@@ -124,7 +124,7 @@ class Datum {
     productName: json["product_name"],
     fkCategory: FkCategory.fromJson(json["fk_category"]),
     fkSubcategory: json["fk_subcategory"],
-    fkBrand: FkBrand.fromJson(json["fk_brand"]),
+    fkBrand: json["fk_brand"] == null ? null : FkBrand.fromJson(json["fk_brand"]),
     tags: List<dynamic>.from(json["tags"].map((x) => x)),
     productShortDesc: json["product_short_desc"],
     productLongDesc: json["product_long_desc"],
@@ -144,7 +144,7 @@ class Datum {
     tax: List<String>.from(json["tax"].map((x) => x)),
     skuid: json["skuid"],
     quantity: json["quantity"],
-    attrName: List<String>.from(json["attr_name"].map((x) => x)),
+    attrName: List<String?>.from(json["attr_name"].map((x) => x)),
     variants: List<Variant>.from(json["variants"].map((x) => Variant.fromJson(x))),
     shippingFeeType: json["shipping_fee_type"],
     shippingFee: json["shipping_fee"],
@@ -168,7 +168,7 @@ class Datum {
     "product_name": productName,
     "fk_category": fkCategory.toJson(),
     "fk_subcategory": fkSubcategory,
-    "fk_brand": fkBrand.toJson(),
+    "fk_brand": fkBrand!.toJson(),
     "tags": List<dynamic>.from(tags.map((x) => x)),
     "product_short_desc": productShortDesc,
     "product_long_desc": productLongDesc,

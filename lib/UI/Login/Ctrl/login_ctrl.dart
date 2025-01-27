@@ -1,13 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:shopeymart/CommonFiles/app_strings.dart';
 import 'package:shopeymart/CommonFiles/my_colors.dart';
 import 'package:shopeymart/Core/api/api_ctrl.dart';
 import 'package:shopeymart/Core/api/api_dio_service.dart';
 import 'package:shopeymart/Core/api/api_string.dart';
-import 'package:shopeymart/Core/api/api_token_service.dart';
 import 'package:shopeymart/Core/toast_helper.dart';
 import 'package:shopeymart/PageRoutes/routes_manager.dart';
 import 'package:shopeymart/SharedPreferences/shared_prefer_value.dart';
@@ -82,10 +79,10 @@ class LoginCtrl extends GetxController {
     if (token != null && token.isNotEmpty) {
       // If a valid token exists, assign it and navigate to the dashboard
       userToken!.value = token;
-      Get.offNamed(Routes.dashBoardScreen);
+      Get.toNamed(Routes.dashBoardScreen);
     } else {
       // If no valid token, navigate to the login screen
-      Get.offNamed(Routes.loginScreen);
+      Get.offAllNamed(Routes.loginScreen);
     }
   }
 

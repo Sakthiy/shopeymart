@@ -57,8 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: AppDouble.double5.h),
                       Text(
                         AppStrings.loginToShopeyMart,
-                        style:
-                            MyTextStyle.poppinsSemiBoldTextStyleF15.copyWith(
+                        style: MyTextStyle.poppinsSemiBoldTextStyleF15.copyWith(
                           fontSize: 24.sp,
                           letterSpacing: 0,
                         ),
@@ -67,8 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         AppStrings.shopSlogan,
                         textAlign: TextAlign.center,
-                        style:
-                            MyTextStyle.poppinsRegularTextStyleF13.copyWith(
+                        style: MyTextStyle.poppinsRegularTextStyleF13.copyWith(
                           fontSize: 14.sp,
                           color: MyColors.greyColor,
                           letterSpacing: 0,
@@ -122,12 +120,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: GestureDetector(
-                          onTap: () =>
-                              Get.toNamed(Routes.forgotPasswordScreen),
+                          onTap: () => Get.toNamed(Routes.forgotPasswordScreen),
                           child: Text(
                             AppStrings.forgetPassword,
-                            style: MyTextStyle.poppinsRegularTextStyleF13
-                                .copyWith(
+                            style:
+                                MyTextStyle.poppinsRegularTextStyleF13.copyWith(
                               color: MyColors.primaryColor,
                               fontWeight: FontWeight.w600,
                             ),
@@ -159,8 +156,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Text(
                             AppStrings.donHaveAnAccountYet,
-                            style: MyTextStyle.poppinsRegularTextStyleF13
-                                .copyWith(
+                            style:
+                                MyTextStyle.poppinsRegularTextStyleF13.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -179,6 +176,21 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ],
                       ),
+
+                      SizedBox(height: AppDouble.double20.h),
+                      GestureDetector(
+                        onTap: () => Get.toNamed(Routes.dashBoardScreen),
+                        child: Text(
+                          AppStrings.skipToLogin,
+                          style:
+                              MyTextStyle.poppinsRegularTextStyleF13.copyWith(
+                            color: MyColors.primaryColor,
+                            fontWeight: FontWeight.w600,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+
                       SizedBox(height: AppDouble.double20.h),
                       Row(
                         children: [
@@ -186,8 +198,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: Divider(thickness: 1, endIndent: 15)),
                           Text(
                             AppStrings.or,
-                            style: MyTextStyle.poppinsRegularTextStyleF13
-                                .copyWith(
+                            style:
+                                MyTextStyle.poppinsRegularTextStyleF13.copyWith(
                               color: MyColors.greyColor,
                               fontWeight: FontWeight.w600,
                             ),
@@ -214,8 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             );
                           } else if (snapshot.hasData) {
-                            return Center(
-                                child: Text(AppStrings.alreadyLogin));
+                            return Center(child: Text(AppStrings.alreadyLogin));
                           } else {
                             return MyButton(
                               // onTap: () => googleSignInCtrl.googleLogin(),

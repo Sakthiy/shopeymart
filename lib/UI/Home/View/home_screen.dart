@@ -42,80 +42,102 @@ class _HomeScreenState extends State<HomeScreen> {
               //   imageHorizontalPadding: 0,
               // ),
 
-                  Skeletonizer(
-                    enabled: categoriesCtrl.categoriesModel.value == null,
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SeeMoreTile(
-                              title: AppStrings.exploreCategories,
-                              icon: const SizedBox(),
-                              onPressed: () {
-                                Get.put(DashBoardCtrl())
-                                    .bottomCurrentIndex
-                                    .value = 1;
-                              }),
-                          categoriesCtrl.categoriesModel.value != null
-                              ? SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: List.generate(
+              Skeletonizer(
+                enabled: categoriesCtrl.categoriesModel.value == null,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SeeMoreTile(
+                        title: AppStrings.exploreCategories,
+                        icon: const SizedBox(),
+                        onPressed: () {
+                          Get.put(DashBoardCtrl()).bottomCurrentIndex.value = 1;
+                        }),
+                    categoriesCtrl.categoriesModel.value != null
+                        ? SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: List.generate(
+                                categoriesCtrl
+                                    .categoriesModel.value!.data.length,
+                                (index) => Padding(
+                                  padding: MyPadding.symmetricEdgeInsetsH4V6,
+                                  child: GestureDetector(
+                                    onTap: () {
                                       categoriesCtrl
-                                          .categoriesModel.value!.data.length,
-                                      (index) => Padding(
-                                        padding:
-                                            MyPadding.symmetricEdgeInsetsH4V6,
-                                        child: GestureDetector(
-                                          onTap: () {},
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                height: AppDouble.double50.r,
-                                                width: AppDouble.double50.r,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  image: DecorationImage(
-                                                    fit: BoxFit.cover,
-                                                    image:
-                                                        CachedNetworkImageProvider(
-                                                      categoriesCtrl
-                                                          .categoriesModel
-                                                          .value!
-                                                          .data[index]
-                                                          .image,
-                                                    ),
-                                                  ),
-                                                ),
+                                              .takingCategoriesAllItemsAppBarTitle
+                                              .value =
+                                          categoriesCtrl.categoriesModel.value!
+                                              .data[index].categoryName;
+                                      categoriesCtrl.update();
+                                      categoriesCtrl.getCategoryByProducts(
+                                        categoryByProductId: categoriesCtrl
+                                            .categoriesModel
+                                            .value!
+                                            .data[index]
+                                            .id,
+                                      );
+                                      categoriesCtrl.getSubCategoryByProducts(
+                                        subCategoryByProductId: categoriesCtrl
+                                            .categoriesModel
+                                            .value!
+                                            .data[index]
+                                            .id,
+                                      );
+                                      Get.toNamed(Routes.categoriesAllItems,
+                                          parameters: {
+                                            'appBarTitle': categoriesCtrl
+                                                .categoriesModel
+                                                .value!
+                                                .data[index]
+                                                .categoryName,
+                                          });
+                                    },
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          height: AppDouble.double50.r,
+                                          width: AppDouble.double50.r,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: CachedNetworkImageProvider(
+                                                categoriesCtrl.categoriesModel
+                                                    .value!.data[index].image,
                                               ),
-                                              SizedBox(
-                                                width: 80.w,
-                                                child: Text(
-                                                    categoriesCtrl
-                                                        .categoriesModel
-                                                        .value!
-                                                        .data[index]
-                                                        .categoryName,
-                                                    textAlign: TextAlign.center,
-                                                    style: MyTextStyle
-                                                        .poppinsRegularTextStyleF13
-                                                        .copyWith(
-                                                      fontSize: 12.0,
-                                                    )),
-                                              ),
-                                            ],
+                                            ),
                                           ),
                                         ),
-                                      ),
+                                        SizedBox(
+                                          width: 80.w,
+                                          child: Text(
+                                              categoriesCtrl
+                                                  .categoriesModel
+                                                  .value!
+                                                  .data[index]
+                                                  .categoryName,
+                                              textAlign: TextAlign.center,
+                                              style: MyTextStyle
+                                                  .poppinsRegularTextStyleF13
+                                                  .copyWith(
+                                                fontSize: 12.0,
+                                              )),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                )
-                              : const SizedBox(),
-                        ],
-                      ),
-                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        : const SizedBox(),
+                  ],
+                ),
+              ),
 
               const SeeMoreTile(
                 title: 'Offer Products',

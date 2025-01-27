@@ -64,17 +64,23 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                         }
                         return GestureDetector(
                           onTap: () {
-                            categoriesCtrl.categoriesCurrentIndex.value = index;
                             categoriesCtrl
                                     .takingCategoriesAllItemsAppBarTitle.value =
-                                categoriesCtrl.categoriesModel.value!.data[index]
-                                    .categoryName;
+                                categoriesCtrl.categoriesModel.value!
+                                    .data[index].categoryName;
                             categoriesCtrl.update();
+                            categoriesCtrl.getCategoryByProducts(
+                              categoryByProductId: categoriesCtrl
+                                  .categoriesModel.value!.data[index].id,
+                            );
+                            categoriesCtrl.getSubCategoryInerProducts(categoryByProductId: categoriesCtrl
+                                  .categoriesModel.value!.data[index].id,);
                             Get.toNamed(Routes.categoriesAllItems, parameters: {
                               'appBarTitle': categoriesCtrl.categoriesModel
                                   .value!.data[index].categoryName,
                             });
                           },
+                          
                           child: Column(
                             children: [
                               Container(
@@ -82,13 +88,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                 width: AppDouble.double60.r,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: categoriesCtrl
-                                                .categoriesCurrentIndex.value ==
-                                            index
-                                        ? MyColors.primaryColor
-                                        : MyColors.whiteColor,
-                                  ),
+                                  
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: CachedNetworkImageProvider(
@@ -100,8 +100,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                               ),
                               SizedBox(height: AppDouble.double3.h),
                               Text(
-                                categoriesCtrl.categoriesModel.value!.data[index]
-                                    .categoryName,
+                                categoriesCtrl.categoriesModel.value!
+                                    .data[index].categoryName,
                                 textAlign: TextAlign.center,
                                 style: MyTextStyle.poppinsSemiBoldTextStyleF15
                                     .copyWith(

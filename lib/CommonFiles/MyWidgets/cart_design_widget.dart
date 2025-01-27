@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shopeymart/CommonFiles/MyWidgets/my_image.dart';
 import 'package:shopeymart/CommonFiles/app_double.dart';
 import 'package:shopeymart/CommonFiles/app_strings.dart';
-import 'package:shopeymart/CommonFiles/image_strings.dart';
 import 'package:shopeymart/CommonFiles/my-text-style.dart';
 import 'package:shopeymart/CommonFiles/my_colors.dart';
 import 'package:shopeymart/CommonFiles/my_padding.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class CartDesignWidget extends StatelessWidget {
   const CartDesignWidget({
     super.key,
-    this.isFavourite = false,
+    this.isFavourite,
     required this.imageUrl,
     required this.isFreeDelivery,
+    this.isStockWarning = false,
+    this.isFavouriteLoad = false,
     required this.productName,
     required this.price,
     this.discountPrice,
@@ -24,19 +24,26 @@ class CartDesignWidget extends StatelessWidget {
     this.discount,
     this.isTopSeller = false,
     this.isBestSeller = false,
+    this.isRateing = false,
     this.minStockWarranty,
     this.maxStockWarranty,
     this.isLimitedTimeDeal = false,
+    this.onTapFavourite,
   });
 
-  final bool isFavourite;
+  final bool? isFavourite;
   final bool isFreeDelivery;
   final bool? isLimitedTimeDeal;
+  final bool? isRateing;
   final String imageUrl;
   final bool? isTopSeller;
   final bool? isBestSeller;
+  final bool? isStockWarning;
+  final bool isFavouriteLoad;
   final String productName;
   final String price;
+  //onTapFavourite
+  final GestureTapCallback? onTapFavourite;
   final String? discountPrice;
   final String? discountType;
   final String? discount;
@@ -75,20 +82,29 @@ class CartDesignWidget extends StatelessWidget {
                       Align(
                         alignment: Alignment.topRight,
                         child: GestureDetector(
+                          onTap: onTapFavourite,
                           child: Container(
-                            padding: EdgeInsets.all(AppDouble.double4).r,
+                            padding: EdgeInsets.all(AppDouble.double5).r,
                             decoration: BoxDecoration(
                               color: MyColors.whiteColor.withOpacity(0.8),
                               shape: BoxShape.circle,
                             ),
-                            child: isFavourite
-                                ? Icon(
-                              Iconsax.heart5,
-                              color: MyColors.redColor,
-                            )
-                                : const Icon(
-                              Iconsax.heart,
-                            ),
+                            child: isFavouriteLoad
+                                ? SizedBox(
+                                    width: AppDouble.double20.w,
+                                    height: AppDouble.double20.w,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: AppDouble.double3,
+                                    ),
+                                  )
+                                : isFavourite!
+                                    ? Icon(
+                                        Iconsax.heart5,
+                                        color: MyColors.redColor,
+                                      )
+                                    : const Icon(
+                                        Iconsax.heart,
+                                      ),
                           ),
                         ),
                       ),
@@ -153,36 +169,39 @@ class CartDesignWidget extends StatelessWidget {
                       ),
 
                       /// Product Rating
-                      Positioned(
-                        bottom: 0,
-                        child: Container(
-                          padding: MyPadding.symmetricEdgeInsetsH2V1,
-                          decoration: BoxDecoration(
-                            color: MyColors.greenColor,
-                            borderRadius:
-                                BorderRadius.circular(AppDouble.double3),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                '4.8',
-                                style: MyTextStyle.poppinsRegularTextStyleF13
-                                    .copyWith(
-                                  fontSize: AppDouble.double10.sp,
-                                  color: MyColors.whiteColor,
+                      !isRateing!
+                          ? const SizedBox()
+                          : Positioned(
+                              bottom: 0,
+                              child: Container(
+                                padding: MyPadding.symmetricEdgeInsetsH2V1,
+                                decoration: BoxDecoration(
+                                  color: MyColors.greenColor,
+                                  borderRadius:
+                                      BorderRadius.circular(AppDouble.double3),
+                                ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      '4.8',
+                                      style: MyTextStyle
+                                          .poppinsRegularTextStyleF13
+                                          .copyWith(
+                                        fontSize: AppDouble.double10.sp,
+                                        color: MyColors.whiteColor,
+                                      ),
+                                    ),
+                                    SizedBox(width: AppDouble.double1.w),
+                                    Icon(
+                                      Icons.star_rate,
+                                      size: 14,
+                                      color: MyColors.whiteColor,
+                                    ),
+                                  ],
                                 ),
                               ),
-                              SizedBox(width: AppDouble.double1.w),
-                              Icon(
-                                Icons.star_rate,
-                                size: 14,
-                                color: MyColors.whiteColor,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                            ),
                     ],
                   ),
                   SizedBox(height: AppDouble.double6.h),
@@ -258,7 +277,7 @@ class CartDesignWidget extends StatelessWidget {
                                       color: MyColors.greenColor,
                                     ),
                                     Text(
-                                      discountType == 'percent'
+                                      discountType == 'Percentage'
                                           ? '$discount% Off'
                                           : '-$discount Flat',
                                       style: MyTextStyle
@@ -314,16 +333,19 @@ class CartDesignWidget extends StatelessWidget {
                                 )
                               : const SizedBox(),
                           SizedBox(width: AppDouble.double6.w),
-                          minStockWarranty! < maxStockWarranty!
-                              ? Text(
-                                  '$minStockWarranty ${AppStrings.onlyLeft}',
-                                  style: MyTextStyle.poppinsRegularTextStyleF13
-                                      .copyWith(
-                                    letterSpacing: 0,
-                                    fontSize: AppDouble.double10.sp,
-                                    color: MyColors.redColor,
-                                  ),
-                                )
+                          isStockWarning!
+                              ? minStockWarranty! < maxStockWarranty!
+                                  ? Text(
+                                      '$minStockWarranty ${AppStrings.onlyLeft}',
+                                      style: MyTextStyle
+                                          .poppinsRegularTextStyleF13
+                                          .copyWith(
+                                        letterSpacing: 0,
+                                        fontSize: AppDouble.double10.sp,
+                                        color: MyColors.redColor,
+                                      ),
+                                    )
+                                  : const SizedBox()
                               : const SizedBox(),
                         ],
                       ),

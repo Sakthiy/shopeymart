@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:shopeymart/Core/api/api_token_service.dart';
 import 'package:shopeymart/Payments/View/payment_screen.dart';
 import 'package:shopeymart/UI/Categories/View/Categories_all_items.dart';
+import 'package:shopeymart/UI/Categories/View/sub_category_product.dart';
 import 'package:shopeymart/UI/Dashboard/View/dash_board_screen.dart';
 import 'package:shopeymart/UI/ForgotPassword/View/create_new_password.dart';
 import 'package:shopeymart/UI/ForgotPassword/View/forgot_password.dart';
@@ -27,6 +27,7 @@ class Routes {
   static const forgetOTPPasswordScreen = '/forgetOTPPasswordScreen';
   static const signupScreen = '/signupScreen';
   static const productDetailsScreen = '/productDetailsScreen';
+  static const subCategoryProductScreen = '/SubCategoryProductScreen';
 }
 
 class RouteManager {
@@ -65,6 +66,9 @@ class RouteManager {
       GetPage(
           name: Routes.productDetailsScreen,
           page: () => const ProductDetailsScreen()),
+      GetPage(
+          name: Routes.subCategoryProductScreen,
+          page: () => const SubCategoryProductScreen()),
     ];
   }
 }

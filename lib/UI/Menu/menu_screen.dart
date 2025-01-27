@@ -32,12 +32,15 @@ class _MenuScreenState extends State<MenuScreen> {
           onTap: () {
             MyBottomSheet.myLoader();
             // Get.put(GoogleSignInCtrl()).googleLogOut();
-            Get.put(AuthController()).initialized;
+            // Get.put(AuthController()).initialized;
           },
-          child: Text(AppStrings.logOut,style: MyTextStyle.poppinsExtraBoldTextStyle.copyWith(
-            letterSpacing: 0,
-            color: MyColors.redColor,
-          ),),
+          child: Text(
+            AppStrings.logOut,
+            style: MyTextStyle.poppinsExtraBoldTextStyle.copyWith(
+              letterSpacing: 0,
+              color: MyColors.redColor,
+            ),
+          ),
         ),
       ],
     );

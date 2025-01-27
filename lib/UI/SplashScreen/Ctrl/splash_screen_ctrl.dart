@@ -9,7 +9,7 @@ class SplashScreenCtrl extends GetxController {
     Timer(
       const Duration(seconds: 3),
       () {
-        Get.put(AuthController()).initialized;
+        // Get.put(AuthController()).initialized;
         Get.put(LoginCtrl()).initialized;
       },
     );
