@@ -73,14 +73,15 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                               categoryByProductId: categoriesCtrl
                                   .categoriesModel.value!.data[index].id,
                             );
-                            categoriesCtrl.getSubCategoryInerProducts(categoryByProductId: categoriesCtrl
-                                  .categoriesModel.value!.data[index].id,);
+                            categoriesCtrl.getSubCategoryByProducts(
+                              subCategoryByProductId: categoriesCtrl
+                                  .categoriesModel.value!.data[index].id,
+                            );
                             Get.toNamed(Routes.categoriesAllItems, parameters: {
                               'appBarTitle': categoriesCtrl.categoriesModel
                                   .value!.data[index].categoryName,
                             });
                           },
-                          
                           child: Column(
                             children: [
                               Container(
@@ -88,7 +89,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                                 width: AppDouble.double60.r,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: CachedNetworkImageProvider(

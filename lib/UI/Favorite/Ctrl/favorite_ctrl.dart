@@ -9,12 +9,15 @@ import 'package:shopeymart/SharedPreferences/shared_prefer_value.dart';
 import 'package:shopeymart/SharedPreferences/shared_preference.dart';
 import 'package:shopeymart/UI/Categories/Ctrl/categories_ctrl.dart';
 import 'package:shopeymart/UI/Favorite/Model/favorite_model.dart';
+import 'package:shopeymart/UI/Favorite/Model/favorite_products_model.dart';
 
 class FavoriteCtrl extends GetxController {
   final ApiController apiController = ApiController();
   final CategoriesCtrl categoriesCtrl = Get.put(CategoriesCtrl());
   final favoriteModel = Rxn<FavoriteModel>();
+  final favoriteProductsModel = Rxn<FavoriteProductsModel>();
   RxInt favoriteIndex = 0.obs;
+  RxInt favoriteSubCataIndex = 0.obs;
   RxBool isLoad = true.obs;
   Future<bool> loader() async {
     await Future.delayed(const Duration(seconds: 2), () {
@@ -32,10 +35,9 @@ class FavoriteCtrl extends GetxController {
   }) async {
     String? token = SharedPreferenceUtils.getString(SharedPrefString.userToken);
     if (token != null && token.isNotEmpty) {
-      print(
-          'Favourite $index ========> ${categoriesCtrl.categoriesByProductsModel.value!.data[index].isInWishlist}');
       await apiController.fetchData(
         url: ApiString.whislistUrl,
+        useToken: true,
         method: isFavourite ? HttpMethod.delete : HttpMethod.post,
         data: {'productId': productId},
       );
@@ -47,10 +49,29 @@ class FavoriteCtrl extends GetxController {
                   .isInWishlist = true
               : categoriesCtrl.categoriesByProductsModel.value!.data[index]
                   .isInWishlist = false;
-          print(
-              'Favourite========> ${categoriesCtrl.categoriesByProductsModel.value!.data[index].isInWishlist}');
+          categoriesCtrl.update();
         }
       }
+    } else {
+      MyBottomSheet.myDialog(
+        message: AppStrings.wishlistLoginDialog,
+        errorCode: 'Login',
+        isError: false,
+        onConfirm: () => Get.offAllNamed(Routes.loginScreen),
+      );
+    }
+  }
+
+  getFavoriteProductes() async {
+    String? token = SharedPreferenceUtils.getString(SharedPrefString.userToken);
+    if (token != null && token.isNotEmpty) {
+      await apiController.fetchData(
+        url: ApiString.whislistUrl,
+        method: HttpMethod.get,
+        useToken: true,
+      );
+      favoriteProductsModel.value =
+          favoriteProductsModelFromJson(apiController.data.value!);
     } else {
       MyBottomSheet.myDialog(
         message: AppStrings.wishlistLoginDialog,

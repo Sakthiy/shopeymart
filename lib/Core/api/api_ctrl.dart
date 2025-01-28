@@ -17,6 +17,7 @@ class ApiController extends GetxController {
     required HttpMethod method,
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? data,
+    bool useToken = false, 
   }) async {
     isLoading(true); // Set loading state to true
 
@@ -26,6 +27,7 @@ class ApiController extends GetxController {
         method: method,
         data: data,
         queryParams: queryParams,
+        // useToken: useToken
       ); // Change the generic type accordingly
       log(json.encode(result));
       // this.data.value = result;

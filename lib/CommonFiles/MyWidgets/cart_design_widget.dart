@@ -12,7 +12,7 @@ import 'package:shopeymart/CommonFiles/my_padding.dart';
 class CartDesignWidget extends StatelessWidget {
   const CartDesignWidget({
     super.key,
-    this.isFavourite,
+    required this.isFavourite,
     required this.imageUrl,
     required this.isFreeDelivery,
     this.isStockWarning = false,
@@ -31,7 +31,7 @@ class CartDesignWidget extends StatelessWidget {
     this.onTapFavourite,
   });
 
-  final bool? isFavourite;
+  final bool isFavourite;
   final bool isFreeDelivery;
   final bool? isLimitedTimeDeal;
   final bool? isRateing;
@@ -97,7 +97,7 @@ class CartDesignWidget extends StatelessWidget {
                                       strokeWidth: AppDouble.double3,
                                     ),
                                   )
-                                : isFavourite!
+                                : isFavourite
                                     ? Icon(
                                         Iconsax.heart5,
                                         color: MyColors.redColor,

@@ -46,102 +46,107 @@ class _SubCategoryProductScreenState extends State<SubCategoryProductScreen> {
                         :
 
                         /// Grid View Products
-                        Expanded(
-                            child: ResponsiveGridList(
-                              horizontalGridSpacing:
-                                  0, // Horizontal space between grid items
-                              verticalGridSpacing:
-                                  0, // Vertical space between grid items
-                              horizontalGridMargin:
-                                  0, // Horizontal space around the grid
-                              verticalGridMargin:
-                                  0, // Vertical space around the grid
-                              minItemWidth: 300
-                                  .w, // The minimum item width (can be smaller, if the layout constraints are smaller)
-                              minItemsPerRow:
-                                  2, // The minimum items to show in a single row. Takes precedence over minItemWidth
-                              // maxItemsPerRow: 5, // The maximum items to show in a single row. Can be useful on large screens
-                              // listViewBuilderOptions: ListViewBuilderOptions(), // Options that are getting passed to the ListView.builder() function
-                              children: List.generate(
-                                categoriesCtrl.subCategoriesInerProductsModel
-                                    .value!.data.length,
-                                (index) => CartDesignWidget(
-                                  maxStockWarranty: 80,
-                                  minStockWarranty: 79,
-                                  discount: categoriesCtrl
-                                      .subCategoriesInerProductsModel
-                                      .value!
-                                      .data[index]
-                                      .offerDiscount
-                                      .toString(),
-                                  isLimitedTimeDeal: false,
-                                  // isFavourite: categoriesCtrl
-                                  //     .subCategoriesInerProductsModel
-                                  //     .value!
-                                  //     .data[index]
-                                  //     .isInWishlist,
-
-                                  onTapFavourite: () =>
-                                      favoriteCtrl.favoritePostDelete(
+                        ResponsiveGridList(
+                            horizontalGridSpacing:
+                                0, // Horizontal space between grid items
+                            verticalGridSpacing:
+                                0, // Vertical space between grid items
+                            horizontalGridMargin:
+                                0, // Horizontal space around the grid
+                            verticalGridMargin:
+                                0, // Vertical space around the grid
+                            minItemWidth: 300
+                                .w, // The minimum item width (can be smaller, if the layout constraints are smaller)
+                            minItemsPerRow:
+                                2, // The minimum items to show in a single row. Takes precedence over minItemWidth
+                            // maxItemsPerRow: 5, // The maximum items to show in a single row. Can be useful on large screens
+                            // listViewBuilderOptions: ListViewBuilderOptions(), // Options that are getting passed to the ListView.builder() function
+                            children: List.generate(
+                              categoriesCtrl.subCategoriesInerProductsModel
+                                  .value!.data.length,
+                              (index) => CartDesignWidget(
+                                maxStockWarranty: 80,
+                                minStockWarranty: 79,
+                                discount: categoriesCtrl
+                                    .subCategoriesInerProductsModel
+                                    .value!
+                                    .data[index]
+                                    .offerDiscount
+                                    .toString(),
+                                isLimitedTimeDeal: false,
+                                isFavourite: categoriesCtrl
+                                    .subCategoriesInerProductsModel
+                                    .value!
+                                    .data[index]
+                                    .isInWishlist,
+                                isFavouriteLoad: favoriteCtrl
+                                            .favoriteSubCataIndex.value ==
+                                        index
+                                    ? favoriteCtrl.apiController.isLoading.value
+                                    : false,
+                                onTapFavourite: () {
+                                  favoriteCtrl.favoriteSubCataIndex.value =
+                                      index;
+                                  favoriteCtrl.favoritePostDelete(
                                     isFavourite: categoriesCtrl
                                         .subCategoriesInerProductsModel
                                         .value!
                                         .data[index]
-                                        .isInWishlist!,
+                                        .isInWishlist,
                                     productId: categoriesCtrl
                                         .subCategoriesInerProductsModel
                                         .value!
                                         .data[index]
                                         .id,
                                     index: index,
-                                  ),
+                                  );
+                                },
 
-                                  // isBestSeller: true,
-                                  isTopSeller: true,
-                                  discountType: categoriesCtrl
-                                      .subCategoriesInerProductsModel
-                                      .value!
-                                      .data[index]
-                                      .offerDiscountType,
-                                  imageUrl: categoriesCtrl
-                                      .subCategoriesInerProductsModel
-                                      .value!
-                                      .data[index]
-                                      .variants
-                                      .first
-                                      .images
-                                      .first,
-                                  isFreeDelivery: categoriesCtrl
-                                          .subCategoriesInerProductsModel
-                                          .value!
-                                          .data
-                                          .first
-                                          .shippingFeeType ==
-                                      'Free Shipping',
-                                  price: categoriesCtrl
-                                      .subCategoriesInerProductsModel
-                                      .value!
-                                      .data[index]
-                                      .variants
-                                      .first
-                                      .price
-                                      .toString(),
-                                  discountPrice: categoriesCtrl
-                                      .subCategoriesInerProductsModel
-                                      .value!
-                                      .data[index]
-                                      .variants
-                                      .first
-                                      .sellingPrice
-                                      .toString(),
-                                  productName: categoriesCtrl
-                                      .subCategoriesInerProductsModel
-                                      .value!
-                                      .data[index]
-                                      .productName,
-                                ),
-                              ), // The list of widgets in the list
-                            ),
+                                // isBestSeller: true,
+                                isTopSeller: true,
+                                discountType: categoriesCtrl
+                                    .subCategoriesInerProductsModel
+                                    .value!
+                                    .data[index]
+                                    .offerDiscountType,
+                                imageUrl: categoriesCtrl
+                                    .subCategoriesInerProductsModel
+                                    .value!
+                                    .data[index]
+                                    .variants
+                                    .first
+                                    .images
+                                    .first,
+                                isFreeDelivery: categoriesCtrl
+                                        .subCategoriesInerProductsModel
+                                        .value!
+                                        .data
+                                        .first
+                                        .shippingFeeType ==
+                                    'Free Shipping',
+                                price: categoriesCtrl
+                                    .subCategoriesInerProductsModel
+                                    .value!
+                                    .data[index]
+                                    .variants
+                                    .first
+                                    .price
+                                    .toString(),
+                                discountPrice: categoriesCtrl
+                                    .subCategoriesInerProductsModel
+                                    .value!
+                                    .data[index]
+                                    .variants
+                                    .first
+                                    .sellingPrice
+                                    .toString(),
+                                productName: categoriesCtrl
+                                    .subCategoriesInerProductsModel
+                                    .value!
+                                    .data[index]
+                                    .productName,
+                              ),
+                            ), // The list of widgets in the list
                           )
                     : const Center(child: CircularProgressIndicator()),
           ),
