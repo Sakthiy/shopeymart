@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shopeymart/CommonFiles/app_double.dart';
@@ -66,6 +67,7 @@ class MyBottomSheet {
   static myDialog({
     required String message,
     required String errorCode,
+    String? textConfirm,
     VoidCallback? onConfirm,
     VoidCallback? onCancel,
     bool isError = true,
@@ -76,9 +78,11 @@ class MyBottomSheet {
           return false;
         },
         title: '${isError ? AppStrings.error : ''} $errorCode',
-        content: Text(message),
+        content: Text(message, textAlign: TextAlign.center),
+        textConfirm: textConfirm,
         confirmTextColor: MyColors.whiteColor,
-        onCancel: onCancel ?? () => Get.back(),
+        onCancel: onCancel,
+        buttonColor: MyColors.primaryColor,
         onConfirm: onConfirm ?? () => Get.back(),
       );
 
@@ -107,5 +111,9 @@ class MyBottomSheet {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
     ));
+  }
+
+  static showToastMassage({required String msg}) {
+    Fluttertoast.showToast(msg: msg);
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shopeymart/CommonFiles/MyWidgets/my_image.dart';
 import 'package:shopeymart/CommonFiles/app_double.dart';
@@ -9,7 +8,7 @@ import 'package:shopeymart/CommonFiles/my-text-style.dart';
 import 'package:shopeymart/CommonFiles/my_colors.dart';
 import 'package:shopeymart/CommonFiles/my_padding.dart';
 
-class CartDesignWidget extends StatelessWidget {
+class CartDesignWidget extends StatefulWidget {
   const CartDesignWidget({
     super.key,
     required this.isFavourite,
@@ -26,7 +25,6 @@ class CartDesignWidget extends StatelessWidget {
     this.isBestSeller = false,
     this.isRateing = false,
     this.minStockWarranty,
-    this.maxStockWarranty,
     this.isLimitedTimeDeal = false,
     this.onTapFavourite,
   });
@@ -48,8 +46,12 @@ class CartDesignWidget extends StatelessWidget {
   final String? discountType;
   final String? discount;
   final int? minStockWarranty;
-  final int? maxStockWarranty;
 
+  @override
+  State<CartDesignWidget> createState() => _CartDesignWidgetState();
+}
+
+class _CartDesignWidgetState extends State<CartDesignWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -72,7 +74,7 @@ class CartDesignWidget extends StatelessWidget {
                         child: MyImage(
                           width: MediaQuery.of(context).size.width,
                           height: MediaQuery.of(context).size.height / 3.h,
-                          imageUrl: imageUrl,
+                          imageUrl: widget.imageUrl,
                           scale: 4,
                           fit: BoxFit.cover,
                         ),
@@ -82,14 +84,14 @@ class CartDesignWidget extends StatelessWidget {
                       Align(
                         alignment: Alignment.topRight,
                         child: GestureDetector(
-                          onTap: onTapFavourite,
+                          onTap: widget.onTapFavourite,
                           child: Container(
                             padding: EdgeInsets.all(AppDouble.double5).r,
                             decoration: BoxDecoration(
                               color: MyColors.whiteColor.withOpacity(0.8),
                               shape: BoxShape.circle,
                             ),
-                            child: isFavouriteLoad
+                            child: widget.isFavouriteLoad
                                 ? SizedBox(
                                     width: AppDouble.double20.w,
                                     height: AppDouble.double20.w,
@@ -97,13 +99,14 @@ class CartDesignWidget extends StatelessWidget {
                                       strokeWidth: AppDouble.double3,
                                     ),
                                   )
-                                : isFavourite
+                                : widget.isFavourite
                                     ? Icon(
                                         Iconsax.heart5,
                                         color: MyColors.redColor,
                                       )
-                                    : const Icon(
+                                    : Icon(
                                         Iconsax.heart,
+                                        color: MyColors.blackColor,
                                       ),
                           ),
                         ),
@@ -112,8 +115,8 @@ class CartDesignWidget extends StatelessWidget {
                       /// Top Seller & Best Seller Label
                       Column(
                         children: [
-                          isTopSeller != null
-                              ? isTopSeller!
+                          widget.isTopSeller != null
+                              ? widget.isTopSeller!
                                   ? Container(
                                       padding: MyPadding.horizontalEdgeInsets6,
                                       decoration: BoxDecoration(
@@ -136,13 +139,13 @@ class CartDesignWidget extends StatelessWidget {
                                     )
                                   : const SizedBox()
                               : const SizedBox(),
-                          isTopSeller != null
-                              ? isTopSeller!
+                          widget.isTopSeller != null
+                              ? widget.isTopSeller!
                                   ? SizedBox(height: AppDouble.double4.h)
                                   : const SizedBox()
                               : const SizedBox(),
-                          isBestSeller != null
-                              ? isBestSeller!
+                          widget.isBestSeller != null
+                              ? widget.isBestSeller!
                                   ? Container(
                                       padding: MyPadding.horizontalEdgeInsets6,
                                       decoration: BoxDecoration(
@@ -169,7 +172,7 @@ class CartDesignWidget extends StatelessWidget {
                       ),
 
                       /// Product Rating
-                      !isRateing!
+                      !widget.isRateing!
                           ? const SizedBox()
                           : Positioned(
                               bottom: 0,
@@ -212,7 +215,7 @@ class CartDesignWidget extends StatelessWidget {
                     children: [
                       /// Product Name
                       Text(
-                        productName,
+                        widget.productName,
                         style: MyTextStyle.poppinsRegularTextStyleF13.copyWith(
                           fontSize: AppDouble.double11.sp,
                         ),
@@ -226,11 +229,11 @@ class CartDesignWidget extends StatelessWidget {
                         // crossAxisAlignment: WrapCrossAlignment.start,
                         children: [
                           /// Product Discount Price
-                          discountPrice != null ||
-                                  discountPrice != '' ||
-                                  discountPrice != '0'
+                          widget.discountPrice != null ||
+                                  widget.discountPrice != '' ||
+                                  widget.discountPrice != '0'
                               ? Text(
-                                  price,
+                                  widget.price,
                                   style: MyTextStyle.poppinsSemiBoldTextStyleF15
                                       .copyWith(
                                     letterSpacing: 0,
@@ -240,19 +243,19 @@ class CartDesignWidget extends StatelessWidget {
                                   ),
                                 )
                               : const SizedBox(),
-                          discountPrice != null ||
-                                  discountPrice != '' ||
-                                  discountPrice != '0'
+                          widget.discountPrice != null ||
+                                  widget.discountPrice != '' ||
+                                  widget.discountPrice != '0'
                               ? SizedBox(width: AppDouble.double6.w)
                               : const SizedBox(),
 
                           /// Product Price
                           Text(
-                            discountPrice == null ||
-                                    discountPrice == '0' ||
-                                    discountPrice == ''
-                                ? '₹$price'
-                                : '₹$discountPrice',
+                            widget.discountPrice == null ||
+                                    widget.discountPrice == '0' ||
+                                    widget.discountPrice == ''
+                                ? '₹${widget.price}'
+                                : '₹${widget.discountPrice}',
                             style: MyTextStyle.poppinsSemiBoldTextStyleF15
                                 .copyWith(
                               letterSpacing: 0,
@@ -265,10 +268,10 @@ class CartDesignWidget extends StatelessWidget {
 
                       /// Product Offers Section
                       /// Limited Time Deal
-                      discountType != null
-                          ? discount != null ||
-                                  discount != '0' ||
-                                  discount != ''
+                      widget.discountType != null
+                          ? widget.discount != null ||
+                                  widget.discount != '0' ||
+                                  widget.discount != ''
                               ? Row(
                                   children: [
                                     Icon(
@@ -277,9 +280,9 @@ class CartDesignWidget extends StatelessWidget {
                                       color: MyColors.greenColor,
                                     ),
                                     Text(
-                                      discountType == 'Percentage'
-                                          ? '$discount% Off'
-                                          : '-$discount Flat',
+                                      widget.discountType == 'Percentage'
+                                          ? '${widget.discount}% Off'
+                                          : '-${widget.discount} Flat',
                                       style: MyTextStyle
                                           .poppinsRegularTextStyleF13
                                           .copyWith(
@@ -290,7 +293,7 @@ class CartDesignWidget extends StatelessWidget {
                                     SizedBox(width: AppDouble.double3.h),
 
                                     /// Limited Time Deal
-                                    isLimitedTimeDeal!
+                                    widget.isLimitedTimeDeal!
                                         ? Container(
                                             padding:
                                                 MyPadding.horizontalEdgeInsets6,
@@ -322,7 +325,7 @@ class CartDesignWidget extends StatelessWidget {
                       SizedBox(height: AppDouble.double3.h),
                       Row(
                         children: [
-                          isFreeDelivery
+                          widget.isFreeDelivery
                               ? Text(
                                   AppStrings.freeDelivery,
                                   style: MyTextStyle.poppinsRegularTextStyleF13
@@ -333,10 +336,9 @@ class CartDesignWidget extends StatelessWidget {
                                 )
                               : const SizedBox(),
                           SizedBox(width: AppDouble.double6.w),
-                          isStockWarning!
-                              ? minStockWarranty! < maxStockWarranty!
-                                  ? Text(
-                                      '$minStockWarranty ${AppStrings.onlyLeft}',
+                          widget.isStockWarning!
+                              ? Text(
+                                      '${widget.minStockWarranty} ${AppStrings.onlyLeft}',
                                       style: MyTextStyle
                                           .poppinsRegularTextStyleF13
                                           .copyWith(
@@ -345,7 +347,7 @@ class CartDesignWidget extends StatelessWidget {
                                         color: MyColors.redColor,
                                       ),
                                     )
-                                  : const SizedBox()
+                                 
                               : const SizedBox(),
                         ],
                       ),

@@ -54,20 +54,16 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       children: List.generate(
                           categoriesCtrl.categoriesModel.value!.data.length,
                           (index) {
-                        if (categoriesCtrl
-                                .takingCategoriesAllItemsAppBarTitle.value ==
-                            '') {
-                          categoriesCtrl
-                                  .takingCategoriesAllItemsAppBarTitle.value =
-                              categoriesCtrl.categoriesModel.value!.data[index]
-                                  .categoryName;
-                        }
                         return GestureDetector(
                           onTap: () {
                             categoriesCtrl
                                     .takingCategoriesAllItemsAppBarTitle.value =
                                 categoriesCtrl.categoriesModel.value!
                                     .data[index].categoryName;
+                            categoriesCtrl.takingCategoriesId.value =
+                                categoriesCtrl
+                                    .categoriesModel.value!.data[index].id;
+
                             categoriesCtrl.update();
                             categoriesCtrl.getCategoryByProducts(
                               categoryByProductId: categoriesCtrl
@@ -77,10 +73,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                               subCategoryByProductId: categoriesCtrl
                                   .categoriesModel.value!.data[index].id,
                             );
-                            Get.toNamed(Routes.categoriesAllItems, parameters: {
-                              'appBarTitle': categoriesCtrl.categoriesModel
-                                  .value!.data[index].categoryName,
-                            });
+                            Get.toNamed(Routes.categoriesAllItems);
                           },
                           child: Column(
                             children: [

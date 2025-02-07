@@ -21,9 +21,14 @@ class AppStrings {
   static String freeDelivery = 'Free Delivery';
   static String currentThemeMode = 'Current Theme Mode';
   static String limitedTimeDeal = 'Limited Time Deal';
+  static String limitedStock = 'Limited Stock';
   static String topSeller = 'Top Seller';
   static String bestSeller = 'Best Seller';
   static String onlyLeft = 'Only left';
+  static String qty = 'Qty';
+  static String outOfStock = 'Out of Stock';
+  static String addToCart = 'Add to Cart';
+  static String buyNow = 'Buy Now';
   static String emailId = 'Email Id';
   static String phoneEmailId = 'Enter the phone no (or) Email Id';
   static String password = 'Password';
@@ -46,6 +51,10 @@ class AppStrings {
   static String newLabel = 'New';
   static String done = 'Done';
   static String error = 'Error';
+  static String remove = 'Remove';
+  static String buyThisNow = 'Buy this now';
+  static String youWillSave = 'You will save';
+  static String onThisOrder = 'on this order';
   static String donHaveAnAccountYet = 'Don\'t have an account yet?';
   static String forgetPassword = 'Forget Password?';
   static String loginWithGoogle = 'Login with Google';
@@ -72,6 +81,19 @@ class AppStrings {
   static String invalidCredentials = "Invalid credentials";
   static String loginSuccessfully = "Login Successfully";
   static String skipToLogin = "Skip to Login";
+  static String loginAgain = "Login Again";
+  static String sessionExpired = "Session Expired";
+  static String sessionMassage =
+      "Your session has expired due to inactivity. Please log in again to continue.";
   static String successfullyLoggedIn = "Successfully logged in";
-  static String wishlistLoginDialog = "To add an item to your Wishlist, you need to log in to your account first.";
+  static String wishlistLoginDialog =
+      "To add an item to your Wishlist, you need to log in to your account first.";
+  static String noInternetConnection = "No Internet Connection";
+  static String noInternetMsg =
+      "No internet connection found. Check your connection or try again!";
+  static String tryAgain = "Try Again!";
+  /// Limited Time offer
+  static String limitedTimeOffer = "Limited Time Offer";
+  static String deliverTo = "Deliver to";
+  static String change = "Change";
 }

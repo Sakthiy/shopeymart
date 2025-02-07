@@ -56,8 +56,10 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               padding: EdgeInsets.only(top: AppDouble.double8).r,
               child: FloatingActionButton(
                 onPressed: () async {
-                bool result =  await SharedPreferenceUtils.removeKey(SharedPrefString.userToken);
-                print('${SharedPrefString.userToken} ========> Remove $result');
+                  bool result = await SharedPreferenceUtils.removeKey(
+                      SharedPrefString.userToken);
+                  print(
+                      '${SharedPrefString.userToken} ========> Remove $result');
                   loginCtrl.loginChecker();
                 },
                 child: Icon(

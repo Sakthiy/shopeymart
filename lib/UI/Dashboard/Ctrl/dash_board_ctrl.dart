@@ -11,7 +11,7 @@ class DashBoardCtrl extends GetxController {
   DateTime? currentBackPressTime;
 
     RxList<Widget> screensList = [
-      HomeScreen(),
+      const HomeScreen(),
       const CategoriesScreen(),
       const FavoriteScreen(),
       const MenuScreen(),

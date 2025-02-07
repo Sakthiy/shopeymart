@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:shopeymart/Core/api/api_dio_service.dart';
 import 'package:shopeymart/Core/api/api_string.dart';
@@ -17,10 +18,9 @@ class ApiController extends GetxController {
     required HttpMethod method,
     Map<String, dynamic>? queryParams,
     Map<String, dynamic>? data,
-    bool useToken = false, 
+    // bool useToken = false,
   }) async {
     isLoading(true); // Set loading state to true
-
     try {
       final result = await dioService.apiCall(
         url: ApiString.baseUrl + url,
@@ -33,8 +33,9 @@ class ApiController extends GetxController {
       // this.data.value = result;
       this.data.value = json.encode(result);
     } catch (e) {
-      print(
-          'API Error: $e'); // This will print the error for debugging purposes
+      if (kDebugMode) {
+        print('API Error: $e');
+      } // This will print the error for debugging purposes
     } finally {
       isLoading(false); // Set loading state to false
     }

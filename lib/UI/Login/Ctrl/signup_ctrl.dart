@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:shopeymart/FirebaseCore/auth_controller.dart';
 
 class SignupCtrl extends GetxController {
   TextEditingController emailOrPhoneNoTextCtrl = TextEditingController();

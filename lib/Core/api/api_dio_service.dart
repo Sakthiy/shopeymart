@@ -63,7 +63,10 @@
 
 import 'package:dio/dio.dart';
 import 'package:get/route_manager.dart';
+import 'package:shopeymart/CommonFiles/app_strings.dart';
+import 'package:shopeymart/CommonFiles/my_bottom_sheet.dart';
 import 'package:shopeymart/CommonFiles/my_colors.dart';
+import 'package:shopeymart/PageRoutes/routes_manager.dart';
 import 'package:shopeymart/SharedPreferences/shared_prefer_value.dart';
 import 'package:shopeymart/SharedPreferences/shared_preference.dart';
 
@@ -83,7 +86,19 @@ class ApiDioService {
             .next(options); // Proceed to the next interceptor or the request
       },
       onError: (DioException e, handler) {
-        return handler.next(e); // Proceed with the error
+        if (e.response?.statusCode == 401) {
+          handleUnauthorized();
+        } else if (e.response?.statusCode == 403) {
+          MyBottomSheet.myDialog(
+            message: AppStrings.wishlistLoginDialog,
+            errorCode: 'Login',
+            isError: false,
+            onConfirm: () => Get.offAllNamed(Routes.loginScreen),
+          );
+        } else {
+          return handler.next(e);
+        }
+        // Proceed with the error
       },
     ));
   }
@@ -97,7 +112,6 @@ class ApiDioService {
   }) async {
     try {
       Response response;
-
       // Handling different HTTP methods
       switch (method) {
         case HttpMethod.get:
@@ -112,6 +126,7 @@ class ApiDioService {
         case HttpMethod.delete:
           response = await dio.delete(url, data: data);
           break;
+        // ignore: unreachable_switch_default
         default:
           throw Exception('Unsupported HTTP method');
       }
@@ -128,6 +143,18 @@ class ApiDioService {
       }
       rethrow; // Propagate error so calling function can handle it if needed
     }
+  }
+
+  handleUnauthorized() {
+    SharedPreferenceUtils.removeKey(SharedPrefString.userToken);
+    return MyBottomSheet.myDialog(
+      message: AppStrings.sessionMassage,
+      errorCode: AppStrings.sessionExpired,
+      isError: false,
+      textConfirm: AppStrings.loginAgain,
+      onConfirm: () => Get.offAllNamed(Routes.loginScreen),
+      onCancel: null,
+    );
   }
 
   // Function to show error dialog

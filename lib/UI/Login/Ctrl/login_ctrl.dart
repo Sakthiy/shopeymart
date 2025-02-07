@@ -45,6 +45,8 @@ class LoginCtrl extends GetxController {
         _showErrorDialog(loginResModel.value!.message);
       } else if (loginResModel.value!.message ==
           AppStrings.successfullyLoggedIn) {
+        isLoginLoader.value = false;
+        update();
         // bool result =
         await SharedPreferValue.setToken(
           userToken: loginResModel.value!.token!,

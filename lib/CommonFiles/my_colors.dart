@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 
 class MyColors {
@@ -21,6 +23,7 @@ class MyColors {
 
   static Color whiteColor = Colors.white;
   static Color blackColor = Colors.black;
+  static Color blackBlueColor = const Color(0xFF011322);
   static Color redColor = Colors.red;
   static Color orangeColor = Colors.orange;
   static Color greenColor = Colors.green;

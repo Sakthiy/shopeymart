@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
-import 'package:shopeymart/FirebaseCore/auth_controller.dart';
 import 'package:shopeymart/UI/Login/Ctrl/login_ctrl.dart';
 
 class SplashScreenCtrl extends GetxController {
+  final Connectivity connectivity = Connectivity();
+  final ConnectivityResult connectivityResult = ConnectivityResult.none;
+  var isInternet = true.obs;
   @override
   void onInit() {
     Timer(
@@ -14,5 +17,15 @@ class SplashScreenCtrl extends GetxController {
       },
     );
     super.onInit();
+    connectivity.onConnectivityChanged.listen((result) {
+      if (connectivityResult == ConnectivityResult.mobile) {
+        isInternet.value = true;
+      } else if (connectivityResult == ConnectivityResult.wifi) {
+        isInternet.value = true;
+      } else {
+        // Get.toNamed(Routes.noInternetScreen);
+        isInternet.value = false;
+      }
+    });
   }
 }

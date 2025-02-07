@@ -1,4 +1,4 @@
-class ImageStrings{
+class ImageStrings {
   static String appLogo = 'assets/SVG/Logo/bee_logo.svg';
   static String appLogoBG = 'assets/SVG/Logo/bee_structure.svg';
   static String phoneOutline = 'assets/SVG/Icons/phone-outline.svg';
@@ -14,4 +14,5 @@ class ImageStrings{
   static String timeIcon = 'assets/SVG/Icons/time-icon.svg';
   static String redHeart = 'assets/images/svg/red_heart.svg';
   static String heart = 'assets/images/svg/heart.svg';
+  static String nointernet = 'assets/images/svg/nointernet.svg';
 }

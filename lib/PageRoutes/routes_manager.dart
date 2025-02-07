@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:shopeymart/Payments/View/payment_screen.dart';
-import 'package:shopeymart/UI/Categories/View/Categories_all_items.dart';
+import 'package:shopeymart/UI/CartScreen/View/cart_screen.dart';
+import 'package:shopeymart/UI/Categories/View/categories_products.dart';
 import 'package:shopeymart/UI/Categories/View/sub_category_product.dart';
 import 'package:shopeymart/UI/Dashboard/View/dash_board_screen.dart';
 import 'package:shopeymart/UI/ForgotPassword/View/create_new_password.dart';
@@ -11,6 +12,7 @@ import 'package:shopeymart/UI/Login/View/login_screen.dart';
 import 'package:shopeymart/UI/Login/View/signup_screen.dart';
 import 'package:shopeymart/UI/Menu/Settings/settings_screen.dart';
 import 'package:shopeymart/UI/ProductsDetails/View/product_details_screen.dart';
+import 'package:shopeymart/UI/SplashScreen/View/no_internet_screen.dart';
 import 'package:shopeymart/UI/SplashScreen/View/splash_screen.dart';
 
 class Routes {
@@ -27,7 +29,9 @@ class Routes {
   static const forgetOTPPasswordScreen = '/forgetOTPPasswordScreen';
   static const signupScreen = '/signupScreen';
   static const productDetailsScreen = '/productDetailsScreen';
-  static const subCategoryProductScreen = '/SubCategoryProductScreen';
+  static const subCategoryProductScreen = '/subCategoryProductScreen';
+  static const noInternetScreen = '/noInternetScreen';
+  static const cartScreen = '/cartScreen';
 }
 
 class RouteManager {
@@ -51,7 +55,7 @@ class RouteManager {
       GetPage(name: Routes.paymentScreen, page: () => const PaymentScreen()),
       GetPage(
           name: Routes.categoriesAllItems,
-          page: () => const CategoriesAllItems()),
+          page: () => const CategoriesProducts()),
       GetPage(name: Routes.loginScreen, page: () => const LoginScreen()),
       GetPage(
           name: Routes.forgotPasswordScreen,
@@ -69,6 +73,9 @@ class RouteManager {
       GetPage(
           name: Routes.subCategoryProductScreen,
           page: () => const SubCategoryProductScreen()),
+      GetPage(
+          name: Routes.noInternetScreen, page: () => const NoInternetScreen()),
+      GetPage(name: Routes.cartScreen, page: () => const CartScreen()),
     ];
   }
 }

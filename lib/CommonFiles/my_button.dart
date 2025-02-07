@@ -17,6 +17,8 @@ class MyButton extends StatelessWidget {
   final double? fontSize;
   final double screenWithDivider;
   final FontWeight? fontWeight;
+  final EdgeInsets? textPadding;
+  final double? borderRadius;
   const MyButton({
     super.key,
     required this.title,
@@ -28,6 +30,8 @@ class MyButton extends StatelessWidget {
     this.onTap,
     this.screenWithDivider = 3.5,
     this.fontWeight,
+    this.textPadding,
+    this.borderRadius,
   });
 
   @override
@@ -35,41 +39,40 @@ class MyButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        padding: textPadding ?? MyPadding.symmetricEdgeInsetsH10V15,
         decoration: borderColor == null
             ? BoxDecoration(
                 color: containerColor ?? MyColors.primaryColor,
-                borderRadius: BorderRadius.circular(AppDouble.double8).r,
+                borderRadius:
+                    BorderRadius.circular(borderRadius ?? AppDouble.double8).r,
               )
             : BoxDecoration(
                 color: containerColor ?? MyColors.primaryColor,
-                borderRadius: BorderRadius.circular(AppDouble.double8).r,
+                borderRadius:
+                    BorderRadius.circular(borderRadius ?? AppDouble.double8).r,
                 border: Border.all(color: borderColor!),
               ),
-        padding: MyPadding.symmetricEdgeInsetsH10V15,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 23.0).r,
-          child: Row(
-            mainAxisAlignment: image == null
-                ? MainAxisAlignment.center
-                : MainAxisAlignment.start,
-            children: [
-              image == null
-                  ? const SizedBox()
-                  : SvgPicture.asset(image!, height: AppDouble.double18.h),
-              image == null
-                  ? const SizedBox()
-                  : SizedBox(width: Get.size.width / screenWithDivider),
-              Text(
-                title,
-                style: MyTextStyle.poppinsRegularTextStyleF13.copyWith(
-                  color: textColor ?? MyColors.whiteColor,
-                  fontWeight: fontWeight ?? FontWeight.bold,
-                  fontSize: fontSize ?? 18.sp,
-                  letterSpacing: 1,
-                ),
+        child: Row(
+          mainAxisAlignment: image == null
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.start,
+          children: [
+            image == null
+                ? const SizedBox()
+                : SvgPicture.asset(image!, height: AppDouble.double18.h),
+            image == null
+                ? const SizedBox()
+                : SizedBox(width: Get.size.width / screenWithDivider),
+            Text(
+              title,
+              style: MyTextStyle.poppinsRegularTextStyleF13.copyWith(
+                color: textColor ?? MyColors.whiteColor,
+                fontWeight: fontWeight ?? FontWeight.bold,
+                fontSize: fontSize ?? 18.sp,
+                letterSpacing: 1,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -70,6 +70,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                               .value =
                                           categoriesCtrl.categoriesModel.value!
                                               .data[index].categoryName;
+                                              categoriesCtrl.takingCategoriesId
+                                      .value =
+                                  categoriesCtrl.categoriesModel.value!
+                                      .data[index].id;
                                       categoriesCtrl.update();
                                       categoriesCtrl.getCategoryByProducts(
                                         categoryByProductId: categoriesCtrl
