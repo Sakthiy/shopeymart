@@ -82,6 +82,8 @@ class AppStrings {
   static String loginSuccessfully = "Login Successfully";
   static String skipToLogin = "Skip to Login";
   static String loginAgain = "Login Again";
+  static String item = "item";
+  static String items = "items";
   static String sessionExpired = "Session Expired";
   static String sessionMassage =
       "Your session has expired due to inactivity. Please log in again to continue.";
@@ -92,8 +94,22 @@ class AppStrings {
   static String noInternetMsg =
       "No internet connection found. Check your connection or try again!";
   static String tryAgain = "Try Again!";
+
   /// Limited Time offer
   static String limitedTimeOffer = "Limited Time Offer";
   static String deliverTo = "Deliver to";
   static String change = "Change";
+  static String price = "Price";
+  static String priceDetails = "Price Details";
+  static String discount = "Discount";
+  static String deliveryCharges = "Delivery Charges";
+  static String fREEDelivery = "FREE Delivery";
+  static String totalAmount = "Total Amount";
+  static String placeOrder = "Place Order";
+
+  /// ------------------------------------
+  static String cartEmptyMessage =
+      "Oops! Your cart is still empty. Fill it with amazing products!";
+  static String addSomeProductsMessage = "Add some products";
+  static String getStarted = "Get Started";
 }

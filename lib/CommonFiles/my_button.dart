@@ -15,6 +15,7 @@ class MyButton extends StatelessWidget {
   final Color? textColor;
   final Color? borderColor;
   final double? fontSize;
+  final double? textLetterSpacing;
   final double screenWithDivider;
   final FontWeight? fontWeight;
   final EdgeInsets? textPadding;
@@ -32,6 +33,7 @@ class MyButton extends StatelessWidget {
     this.fontWeight,
     this.textPadding,
     this.borderRadius,
+    this.textLetterSpacing,
   });
 
   @override
@@ -66,10 +68,10 @@ class MyButton extends StatelessWidget {
             Text(
               title,
               style: MyTextStyle.poppinsRegularTextStyleF13.copyWith(
-                color: textColor ?? MyColors.whiteColor,
+                color: textColor,
                 fontWeight: fontWeight ?? FontWeight.bold,
                 fontSize: fontSize ?? 18.sp,
-                letterSpacing: 1,
+                letterSpacing: textLetterSpacing ?? 1,
               ),
             ),
           ],

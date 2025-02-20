@@ -132,7 +132,7 @@ class ApiDioService {
       }
 
       // Check if the status code is successful
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200|| response.statusCode == 404) {
         return response.data as T;
       } else {
         throw Exception('Failed to load data: ${response.statusCode}');

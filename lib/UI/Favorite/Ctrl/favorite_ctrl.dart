@@ -21,7 +21,7 @@ class FavoriteCtrl extends GetxController {
     required String productId,
   }) async {
     await apiController.fetchData(
-      url: ApiString.whislistUrl,
+      url: ApiString.wishListUrl,
       method: HttpMethod.post,
       data: {'productId': productId},
     );
@@ -35,7 +35,7 @@ class FavoriteCtrl extends GetxController {
     required String productId,
   }) async {
     await apiController.fetchData(
-      url: ApiString.whislistUrl,
+      url: ApiString.wishListUrl,
       method: HttpMethod.delete,
       data: {'productId': productId},
     );
@@ -48,7 +48,7 @@ class FavoriteCtrl extends GetxController {
   getFavoriteProduct() async {
     favoriteProductsModel.value = null;
     await apiController.fetchData(
-      url: ApiString.whislistUrl,
+      url: ApiString.wishListUrl,
       method: HttpMethod.get,
     );
     favoriteProductsModel.value =
@@ -57,7 +57,7 @@ class FavoriteCtrl extends GetxController {
 
   unFavorite({required String productId}) async {
     await apiController.fetchData(
-      url: ApiString.whislistUrl,
+      url: ApiString.wishListUrl,
       method: HttpMethod.delete,
       data: {'productId': productId},
     );

@@ -30,7 +30,7 @@ class _NoInternetScreenState extends State<NoInternetScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(
-                ImageStrings.nointernet,
+                ImageStrings.noInternet,
                 width: Get.size.width / 1.3,
               ),
               SizedBox(height: AppDouble.double50.h),

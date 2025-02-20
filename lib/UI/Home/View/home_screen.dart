@@ -70,10 +70,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                               .value =
                                           categoriesCtrl.categoriesModel.value!
                                               .data[index].categoryName;
-                                              categoriesCtrl.takingCategoriesId
-                                      .value =
-                                  categoriesCtrl.categoriesModel.value!
-                                      .data[index].id;
+                                      categoriesCtrl.takingCategoriesId.value =
+                                          categoriesCtrl.categoriesModel.value!
+                                              .data[index].id;
                                       categoriesCtrl.update();
                                       categoriesCtrl.getCategoryByProducts(
                                         categoryByProductId: categoriesCtrl
@@ -143,44 +142,44 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              const SeeMoreTile(
-                title: 'Offer Products',
-                icon: SizedBox(),
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Skeletonizer(
-                  enabled: false,
-                  ignoreContainers: true,
-                  ignorePointers: true,
-                  enableSwitchAnimation: true,
-                  child: Row(children: [
-                    ...List.generate(
-                      8,
-                      (index) => GestureDetector(
-                        // onTap: () => Get.toNamed(Routes.paymentScreen),
-                        onTap: () => Get.toNamed(Routes.productDetailsScreen),
-                        child: const CartDesignWidgetSmall(
-                          maxStockWarranty: 80,
-                          minStockWarranty: 79,
-                          discount: '69',
-                          isLimitedTimeDeal: true,
-                          isFavourite: true,
-                          // isBestSeller: true,
-                          isTopSeller: true,
-                          discountType: 'percent',
-                          imageUrl:
-                              'https://m.media-amazon.com/images/I/61FVOB9ty-L._SY879_.jpg',
-                          isFreeDelivery: true,
-                          price: '800',
-                          productName:
-                              """OM SAI LATEST CREATION Soft Cotton & Silk Saree for Women Banarasi Saree Under 399 2021 Beautiful for Women Saree""",
-                        ),
-                      ),
-                    ),
-                  ]),
-                ),
-              ),
+              // const SeeMoreTile(
+              //   title: 'Offer Products',
+              //   icon: SizedBox(),
+              // ),
+              // SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Skeletonizer(
+              //     enabled: false,
+              //     ignoreContainers: true,
+              //     ignorePointers: true,
+              //     enableSwitchAnimation: true,
+              //     child: Row(children: [
+              //       ...List.generate(
+              //         8,
+              //         (index) => GestureDetector(
+              //           // onTap: () => Get.toNamed(Routes.paymentScreen),
+              //           onTap: () => Get.toNamed(Routes.productDetailsScreen),
+              //           child: const CartDesignWidgetSmall(
+              //             maxStockWarranty: 80,
+              //             minStockWarranty: 79,
+              //             discount: '69',
+              //             isLimitedTimeDeal: true,
+              //             isFavourite: true,
+              //             // isBestSeller: true,
+              //             isTopSeller: true,
+              //             discountType: 'percent',
+              //             imageUrl:
+              //                 'https://m.media-amazon.com/images/I/61FVOB9ty-L._SY879_.jpg',
+              //             isFreeDelivery: true,
+              //             price: '800',
+              //             productName:
+              //                 """OM SAI LATEST CREATION Soft Cotton & Silk Saree for Women Banarasi Saree Under 399 2021 Beautiful for Women Saree""",
+              //           ),
+              //         ),
+              //       ),
+              //     ]),
+              //   ),
+              // ),
             ],
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shopeymart/CommonFiles/MyWidgets/banner_images.dart';
 import 'package:shopeymart/CommonFiles/MyWidgets/cart_design_widget_small.dart';
 import 'package:shopeymart/CommonFiles/MyWidgets/my_image.dart';
 import 'package:shopeymart/CommonFiles/MyWidgets/see_more_tile.dart';
@@ -13,7 +14,6 @@ import 'package:shopeymart/CommonFiles/my_colors.dart';
 import 'package:shopeymart/PageRoutes/routes_manager.dart';
 import 'package:shopeymart/UI/Favorite/Ctrl/favorite_ctrl.dart';
 import 'package:shopeymart/UI/ProductsDetails/Ctrl/product_details_ctrl.dart';
-import 'package:shopeymart/UI/ProductsDetails/Model/product_model.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
@@ -25,6 +25,7 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   final productDetailsCtrl = Get.put(ProductDetailsCtrl());
+
   @override
   Widget build(BuildContext context) {
     // ignore: deprecated_member_use
@@ -36,82 +37,33 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       child: Scaffold(
         body: SafeArea(
             child: Obx(
-          () => productDetailsCtrl.apiController.isLoading.value ||
-                  productDetailsCtrl.productModel.value == null
+          () => productDetailsCtrl.productModel.value == null
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Stack(
-                        alignment: Alignment.bottomCenter,
+                        alignment: Alignment.topCenter,
                         children: [
-                          Stack(
-                            children: [
-                              MyImage(
-                                fit: BoxFit.cover,
-                                height: AppDouble.double270.h,
-                                imageUrl: productDetailsCtrl.productModel.value!
-                                        .data.first.variants.first.images[
-                                    productDetailsCtrl.selectImageIndex.value],
-                              ),
-                              imageTopMenu(productDetailsCtrl),
-                            ],
+                          BannerImages(
+                            height: Get.size.height / 2,
+                            viewportFraction: 1,
+                            bannerImageList: productDetailsCtrl.productModel
+                                .value!.data.first.variants.first.images
+                                .map(
+                                  (e) => e,
+                                )
+                                .toList(),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                              height: AppDouble.double50,
-                              child: ListView.separated(
-                                padding:
-                                    EdgeInsets.only(left: AppDouble.double20),
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) =>
-                                    GestureDetector(
-                                  onTap: () {
-                                    productDetailsCtrl.selectImageIndex.value =
-                                        index;
-                                    productDetailsCtrl.update();
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: productDetailsCtrl
-                                                  .selectImageIndex.value ==
-                                              index
-                                          ? Border.all(
-                                              color: MyColors.primaryColor,
-                                              width: AppDouble.double2,
-                                            )
-                                          : const Border(),
-                                    ),
-                                    child: MyImage(
-                                      imageUrl: productDetailsCtrl
-                                          .productModel
-                                          .value!
-                                          .data
-                                          .first
-                                          .variants
-                                          .first
-                                          .images[index],
-                                    ),
-                                  ),
-                                ),
-                                separatorBuilder: (context, index) => SizedBox(
-                                  width: AppDouble.double20,
-                                ),
-                                itemCount: productDetailsCtrl
-                                    .productModel
-                                    .value!
-                                    .data
-                                    .first
-                                    .variants
-                                    .first
-                                    .images
-                                    .length,
-                              ),
-                            ),
-                          ),
+                          // MyImage(
+                          //   fit: BoxFit.cover,
+                          //   height: AppDouble.double270.h,
+                          //   imageUrl: productDetailsCtrl.productModel.value!
+                          //           .data.first.variants.first.images[
+                          //       productDetailsCtrl.selectImageIndex.value],
+                          // ),
+                          imageTopMenu(productDetailsCtrl),
                         ],
                       ),
                       SizedBox(height: AppDouble.double10.h),
@@ -121,9 +73,73 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                 .w,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          // mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            /// Brand Name
+                            /// Variant  Images
+                            productDetailsCtrl.productModel.value!.data.first
+                                        .variants.length ==
+                                    1
+                                ? const SizedBox()
+                                : Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SizedBox(
+                                      height: Get.size.width / 3,
+                                      child: ListView.separated(
+                                        itemCount: productDetailsCtrl
+                                            .productModel
+                                            .value!
+                                            .data
+                                            .first
+                                            .variants
+                                            .length,
+                                        // padding:
+                                        //     EdgeInsets.only(left: AppDouble.double20),
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (context, index) =>
+                                            GestureDetector(
+                                          onTap: () {
+                                            productDetailsCtrl
+                                                .selectImageIndex.value = index;
+                                            productDetailsCtrl.update();
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              border: productDetailsCtrl
+                                                          .selectImageIndex
+                                                          .value ==
+                                                      index
+                                                  ? Border.all(
+                                                      color:
+                                                          MyColors.primaryColor,
+                                                      width: AppDouble.double2,
+                                                    )
+                                                  : const Border(),
+                                            ),
+                                            child: MyImage(
+                                              errorImageWidth:
+                                                  Get.size.width / 4,
+                                              // errorImageHeight: Get.size.height / 4,
+                                              imageUrl: productDetailsCtrl
+                                                  .productModel
+                                                  .value!
+                                                  .data
+                                                  .first
+                                                  .variants[index]
+                                                  .images
+                                                  .first,
+                                            ),
+                                          ),
+                                        ),
+                                        separatorBuilder: (context, index) =>
+                                            SizedBox(
+                                          width: AppDouble.double20,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
 
+                            /// Brand Name
                             productDetailsCtrl.productModel.value!.data.first
                                         .fkBrand ==
                                     null
@@ -635,21 +651,34 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   child: Row(
                     spacing: AppDouble.double10.w,
                     children: [
-                      Expanded(child: MyButton(title: AppStrings.buyNow)),
                       Expanded(
                           child: MyButton(
-                        onTap: productDetailsCtrl.isStockAvailable.value
-                            ? null
-                            : () {
-                                Get.toNamed(Routes.cartScreen);
-                              },
-                        title: productDetailsCtrl.isStockAvailable.value
-                            ? AppStrings.outOfStock
-                            : AppStrings.addToCart,
-                        containerColor: MyColors.transparent,
-                        borderColor: MyColors.greyColor,
-                        textColor: MyColors.blackColor,
+                        title: AppStrings.buyNow,
+                        textColor: MyColors.whiteColor,
                       )),
+                      Expanded(
+                        child: MyButton(
+                          onTap: productDetailsCtrl.isStockAvailable.value
+                              ? null
+                              : () async {
+                                  await productDetailsCtrl.addToCartFun(
+                                    productId: productDetailsCtrl
+                                        .productModel.value!.data.first.id,
+                                    variantId: productDetailsCtrl.productModel
+                                        .value!.data.first.variants.first.id,
+                                    quantity: productDetailsCtrl
+                                        .selectedQuantity.value,
+                                  );
+                                  productDetailsCtrl.getCartData();
+                                },
+                          title: productDetailsCtrl.isStockAvailable.value
+                              ? AppStrings.outOfStock
+                              : AppStrings.addToCart,
+                          containerColor: MyColors.transparent,
+                          borderColor: MyColors.greyColor,
+                          // textColor: MyColors.blackColor,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -672,7 +701,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   color: MyColors.whiteColor.withOpacity(0.8),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Iconsax.arrow_left)),
+                child: Icon(
+                  Iconsax.arrow_left,
+                  color: MyColors.blackColor,
+                )),
           ),
           const Spacer(),
           GestureDetector(
@@ -724,7 +756,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         color: productDetailsCtrl
                                 .productModel.value!.data.first.isInWishlist
                             ? MyColors.redColor
-                            : null,
+                            : MyColors.blackColor,
                       )),
           ),
           SizedBox(width: AppDouble.double10.w),
@@ -735,17 +767,44 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   color: MyColors.whiteColor.withOpacity(0.8),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Iconsax.share)),
+                child: Icon(Iconsax.send_2, color: MyColors.blackColor)),
           ),
           SizedBox(width: AppDouble.double10.w),
-          GestureDetector(
-            child: Container(
-              padding: EdgeInsets.all(AppDouble.double6).r,
-              decoration: BoxDecoration(
-                color: MyColors.whiteColor.withOpacity(0.8),
-                shape: BoxShape.circle,
+          Obx(
+            () => GestureDetector(
+              onTap: () async {
+                // productDetailsCtrl.getCartData();
+                // bool result =
+                await Get.toNamed(Routes.cartScreen);
+                // if (result){
+                //   productDetailsCtrl.getCartData();
+                // }
+              },
+              child: Container(
+                padding: EdgeInsets.all(AppDouble.double6).r,
+                decoration: BoxDecoration(
+                  color: MyColors.whiteColor.withOpacity(0.8),
+                  shape: BoxShape.circle,
+                ),
+                child: Badge(
+                  isLabelVisible: productDetailsCtrl.cartCtrl.cartModel.value ==
+                              null ||
+                          productDetailsCtrl.cartCtrl.cartModel.value!.count ==
+                              null
+                      ? false
+                      : true,
+                  label: productDetailsCtrl.cartCtrl.cartModel.value == null
+                      ? const SizedBox()
+                      : Text('${productDetailsCtrl.cartCount.value}',
+                          style: TextStyle(
+                            color: MyColors.whiteColor,
+                          )),
+                  child: Icon(
+                    Iconsax.shopping_bag,
+                    color: MyColors.blackColor,
+                  ),
+                ),
               ),
-              child: const Icon(Iconsax.shopping_bag),
             ),
           ),
           SizedBox(width: AppDouble.double10.w),

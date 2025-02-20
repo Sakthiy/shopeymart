@@ -2,11 +2,15 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:shopeymart/CommonFiles/app_strings.dart';
+import 'package:shopeymart/CommonFiles/my_bottom_sheet.dart';
 import 'package:shopeymart/Core/api/api_dio_service.dart';
+import 'package:shopeymart/Core/api/api_error_massage_model.dart';
 import 'package:shopeymart/Core/api/api_string.dart';
 
 class ApiController extends GetxController {
   var isLoading = false.obs;
+  final apiErrorMassageModel = Rxn<ApiErrorMassageModel>();
   var data = Rxn<
       String>(); // You can change String to the actual model type based on your response
 
@@ -32,6 +36,14 @@ class ApiController extends GetxController {
       log(json.encode(result));
       // this.data.value = result;
       this.data.value = json.encode(result);
+      apiErrorMassageModel.value =
+          apiErrorMassageModelFromJson(json.encode(result));
+      if (apiErrorMassageModel.value!.success == false) {
+        MyBottomSheet.myDialog(
+          message: apiErrorMassageModel.value!.message,
+          errorCode: AppStrings.error,
+        );
+      }
     } catch (e) {
       if (kDebugMode) {
         print('API Error: $e');

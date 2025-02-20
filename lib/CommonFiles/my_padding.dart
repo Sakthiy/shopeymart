@@ -23,6 +23,8 @@ class MyPadding {
   static EdgeInsets horizontalEdgeInsets15 =  const EdgeInsets.symmetric(horizontal: 15.0);
   static EdgeInsets horizontalEdgeInsets18 =  const EdgeInsets.symmetric(horizontal: 18.0);
   static EdgeInsets horizontalEdgeInsets20 =  const EdgeInsets.symmetric(horizontal: 20.0);
+  static EdgeInsets horizontalEdgeInsets25 =  const EdgeInsets.symmetric(horizontal: 25.0);
+  static EdgeInsets horizontalEdgeInsets30 =  const EdgeInsets.symmetric(horizontal: 30.0);
 
   //Only Horizontal
   static EdgeInsets verticalEdgeInsets4 =  const EdgeInsets.symmetric(vertical: 4.0);

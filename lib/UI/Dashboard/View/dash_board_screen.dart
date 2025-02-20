@@ -7,6 +7,7 @@ import 'package:shopeymart/CommonFiles/app_double.dart';
 import 'package:shopeymart/CommonFiles/app_numbers.dart';
 import 'package:shopeymart/CommonFiles/app_strings.dart';
 import 'package:shopeymart/CommonFiles/my_colors.dart';
+import 'package:shopeymart/PageRoutes/routes_manager.dart';
 import 'package:shopeymart/SharedPreferences/shared_prefer_value.dart';
 import 'package:shopeymart/SharedPreferences/shared_preference.dart';
 import 'package:shopeymart/UI/Dashboard/Ctrl/dash_board_ctrl.dart';
@@ -55,12 +56,8 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             floatingActionButton: Padding(
               padding: EdgeInsets.only(top: AppDouble.double8).r,
               child: FloatingActionButton(
-                onPressed: () async {
-                  bool result = await SharedPreferenceUtils.removeKey(
-                      SharedPrefString.userToken);
-                  print(
-                      '${SharedPrefString.userToken} ========> Remove $result');
-                  loginCtrl.loginChecker();
+                onPressed: () {
+                  Get.toNamed(Routes.cartScreen);
                 },
                 child: Icon(
                   Icons.shopping_cart_outlined,

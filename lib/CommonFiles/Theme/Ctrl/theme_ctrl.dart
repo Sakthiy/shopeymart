@@ -25,8 +25,7 @@ class ThemeCtrl extends GetxController {
       primarySwatch: MyColors.myMaterialColor(
         MyColors.primaryColor,
       ), // You can use your custom color
-      scaffoldBackgroundColor:
-        MyColors.lightPrimaryColor,
+      scaffoldBackgroundColor: MyColors.lightPrimaryColor,
       appBarTheme: const AppBarTheme(
           // color: MyColors.myMaterialColor(
           //   MyColors.primaryColor,
@@ -46,10 +45,13 @@ class ThemeCtrl extends GetxController {
       primarySwatch: MyColors.myMaterialColor(
         MyColors.primaryColor,
       ), // You can use your custom color
-      textTheme: const TextTheme(
-        bodySmall: TextStyle(fontFamily: 'Poppins-Medium'),
-        bodyLarge: TextStyle(fontFamily: 'Poppins-Medium'),
-        bodyMedium: TextStyle(fontFamily: 'Poppins-Medium'),
+      textTheme: TextTheme(
+        bodySmall:
+            TextStyle(fontFamily: 'Poppins-Medium', color: MyColors.whiteColor),
+        bodyLarge:
+            TextStyle(fontFamily: 'Poppins-Medium', color: MyColors.whiteColor),
+        bodyMedium:
+            TextStyle(fontFamily: 'Poppins-Medium', color: MyColors.whiteColor),
       ),
       appBarTheme: const AppBarTheme(
           // color: MyColors.myMaterialColor(

@@ -2,18 +2,25 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shopeymart/CommonFiles/my_bottom_sheet.dart';
 import 'package:shopeymart/Core/api/api_ctrl.dart';
 import 'package:shopeymart/Core/api/api_dio_service.dart';
 import 'package:shopeymart/Core/api/api_string.dart';
+import 'package:shopeymart/PageRoutes/routes_manager.dart';
+import 'package:shopeymart/UI/CartScreen/Ctrl/cart_ctrl.dart';
+import 'package:shopeymart/UI/CartScreen/Model/add_to_cart_post_model.dart';
 import 'package:shopeymart/UI/ProductsDetails/Model/product_model.dart';
 
 class ProductDetailsCtrl extends GetxController {
   final apiController = ApiController();
+  final cartCtrl = Get.put(CartCtrl());
   final productModel = Rxn<ProductModel>();
+  final addToCartPostModel = Rxn<AddToCartPostModel>();
   var isFavouriteLoad = false.obs;
   var isStockAvailable = false.obs;
   RxInt selectedQuantity = 0.obs;
   RxList<int> quantityList = <int>[].obs;
+  var cartCount = 0.obs;
 
   RxInt selectImageIndex = 0.obs;
   RxInt selectColorIndex = 0.obs;
@@ -51,7 +58,8 @@ class ProductDetailsCtrl extends GetxController {
 
     /// Product Quantity Cal
     selectedQuantity.value = productModel.value!.data.first.minOrderQty;
-    isStockAvailable.value = productModel.value!.data.first.variants.first.stock == 0;
+    isStockAvailable.value =
+        productModel.value!.data.first.variants.first.stock == 0;
     for (int i = productModel.value!.data.first.minOrderQty;
         i <= productModel.value!.data.first.variants.first.stock;
         i++) {
@@ -62,6 +70,25 @@ class ProductDetailsCtrl extends GetxController {
       startTimer: productModel.value!.data.first.offerStartDate,
       endTimer: productModel.value!.data.first.offerEndDate,
     );
+  }
+
+  addToCartFun({
+    required String productId,
+    required String variantId,
+    required int quantity,
+  }) async {
+    await apiController
+        .fetchData(url: ApiString.addToCart, method: HttpMethod.post, data: {
+      "productId": productId,
+      "variantId": variantId,
+      "quantity": quantity,
+    });
+
+    addToCartPostModel.value =
+        addToCartPostModelFromJson(apiController.data.value!);
+    if (addToCartPostModel.value!.success == true) {
+      MyBottomSheet.showToastMassage(msg: addToCartPostModel.value!.message);
+    }
   }
 
   RxString productTimer = ''.obs;
@@ -131,9 +158,15 @@ class ProductDetailsCtrl extends GetxController {
     seconds.value = 0;
   }
 
+  getCartData() async {
+    await cartCtrl.getCartData();
+    cartCount.value = cartCtrl.cartCount.value;
+  }
+
   @override
   void onInit() {
     getProductDetails(productId: Get.parameters['productId']!);
+    getCartData();
     super.onInit();
   }
 

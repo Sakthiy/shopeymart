@@ -68,6 +68,7 @@ class MyBottomSheet {
     required String message,
     required String errorCode,
     String? textConfirm,
+    String? apiErrorMessage,
     VoidCallback? onConfirm,
     VoidCallback? onCancel,
     bool isError = true,
@@ -78,7 +79,19 @@ class MyBottomSheet {
           return false;
         },
         title: '${isError ? AppStrings.error : ''} $errorCode',
-        content: Text(message, textAlign: TextAlign.center),
+        content: Column(
+          children: [
+            Text(message, textAlign: TextAlign.center),
+            apiErrorMessage == null
+                ? const SizedBox()
+                : apiErrorMessage == ''
+                    ? const SizedBox()
+                    : Text(
+                        apiErrorMessage,
+                        style: MyTextStyle.poppinsMediumTextStyle,
+                      ),
+          ],
+        ),
         textConfirm: textConfirm,
         confirmTextColor: MyColors.whiteColor,
         onCancel: onCancel,
